@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6954552094790282887}
   - component: {fileID: -2087201096716928708}
   m_Layer: 20
-  m_Name: Bullet
+  m_Name: Player Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -116,7 +116,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.0021022186, y: 0}
@@ -145,3 +145,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitVFX: {fileID: 8699622481109766837, guid: f8c82a5fe18b82143b008ac4f5976d73, type: 3}
+  tagToAvoid: Player
+  damageDealt: 1

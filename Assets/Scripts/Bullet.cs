@@ -5,6 +5,8 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private GameObject hitVFX = null;
+    [SerializeField] private string tagToAvoid = "Player";
+    [SerializeField] private int damageDealt = 1;
 
     private GameObject player;
 
@@ -22,12 +24,17 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<PlayerMovement>()) { return; }
+        if (collision.gameObject.tag == tagToAvoid) { return; }
         GameObject vfx = Instantiate(hitVFX, transform.position, Quaternion.identity);
         vfx.layer = gameObject.layer;
         vfx.GetComponent<SpriteRenderer>().sortingLayerName = GetComponent<SpriteRenderer>().sortingLayerName;
+        if (collision.gameObject.GetComponent<Health>())
+        {
+            collision.gameObject.GetComponent<Health>().TakeDamage(damageDealt);
+        }
+            
         Destroy(vfx, 5f);
         Destroy(gameObject);
     }

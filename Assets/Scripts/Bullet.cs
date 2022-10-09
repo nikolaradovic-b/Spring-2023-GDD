@@ -1,3 +1,4 @@
+using Cainos.PixelArtTopDown_Basic;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,7 +27,7 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == tagToAvoid) { return; }
+        if (collision.gameObject.tag == tagToAvoid || collision.gameObject.GetComponent<LayerTrigger>()) { return; }
         GameObject vfx = Instantiate(hitVFX, transform.position, Quaternion.identity);
         vfx.layer = gameObject.layer;
         vfx.GetComponent<SpriteRenderer>().sortingLayerName = GetComponent<SpriteRenderer>().sortingLayerName;

@@ -10,7 +10,7 @@ public class EnemyMovement : MonoBehaviour
 
     private GameObject nextWaypoint;
     private Rigidbody2D rb;
-    private EnemyShooter shooter;
+    private EnemyShooterBase shooter;
 
     private int currentWaypointIndex;
     private bool startingMoving = true;
@@ -26,8 +26,8 @@ public class EnemyMovement : MonoBehaviour
         GameObject initialWaypoint = waypoints[randomIndex];
         transform.position = initialWaypoint.transform.position;
         nextWaypoint = initialWaypoint;
-        rb = GetComponent<Rigidbody2D>();
-        shooter = GetComponent<EnemyShooter>();
+        rb = GetComponentInChildren<Rigidbody2D>();
+        shooter = GetComponentInChildren<EnemyShooterBase>();
     }
 
     private void Update()
@@ -50,15 +50,21 @@ public class EnemyMovement : MonoBehaviour
         }
         else if (startingMoving)
         {
-            // move to next waypoint
-            transform.position = Vector2.MoveTowards(
-                transform.position,
-                nextWaypoint.transform.position,
-                Time.deltaTime * patrolSpeed);
+            // Move to next waypoint
+            MoveTo(nextWaypoint.transform.position, 1f);
         }
         faceDir = (nextWaypoint.transform.position - transform.position).normalized;
         float angle = Mathf.Atan2(faceDir.y, faceDir.x) * Mathf.Rad2Deg - 90f;
         rb.rotation = angle;
+    }
+
+    public void MoveTo(Vector2 location, float speedMultiplier)
+    {
+        // Move to location
+        transform.position = Vector2.MoveTowards(
+            transform.position,
+            location,
+            Time.deltaTime * patrolSpeed * speedMultiplier);
     }
 
     private IEnumerator PauseThenStart()

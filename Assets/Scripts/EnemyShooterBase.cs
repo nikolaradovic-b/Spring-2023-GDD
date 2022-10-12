@@ -2,29 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyShooter : MonoBehaviour
+public abstract class EnemyShooterBase : MonoBehaviour
 {
-    [SerializeField] private Transform firingOrigin = null;
-    [SerializeField] private GameObject bulletPrefab = null;
-    [SerializeField] private float bulletForce = 20f;
-    [SerializeField] private float fireInterval = 2f;
-    [SerializeField] private float playerProximityLimit = 10f;
+    [SerializeField] protected Transform firingOrigin = null;
+    [SerializeField] protected GameObject bulletPrefab = null;
+    [SerializeField] protected float bulletForce = 20f;
+    [SerializeField] protected float fireInterval = 2f;
+    [SerializeField] protected float playerProximityLimit = 10f;
 
-    private Rigidbody2D rb;
-    private PlayerMovement player;
+    protected Rigidbody2D rb;
+    protected PlayerMovement player;
 
-    private bool seePlayer = false;
-    private float fireTimer;
-    private bool shooting = false;
+    protected bool seePlayer = false;
+    protected float fireTimer;
+    protected bool shooting = false;
 
-    private void Start()
+    protected virtual void Start()
     {
         player = FindObjectOfType<PlayerMovement>();
         rb = GetComponent<Rigidbody2D>();
         fireTimer = fireInterval;
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         if (player == null)
         {
@@ -53,20 +53,9 @@ public class EnemyShooter : MonoBehaviour
         }
     }
 
-    private void FirePlayerIfSeen()
+    protected virtual void FirePlayerIfSeen()
     {
-        if (seePlayer && fireTimer <= Mathf.Epsilon)
-        {
-            Debug.Log("Fire!");
-            GameObject bulletInstance = Instantiate(bulletPrefab, firingOrigin.position, firingOrigin.rotation);
-            Rigidbody2D rb = bulletInstance.GetComponent<Rigidbody2D>();
-            rb.AddForce(-1 * firingOrigin.up * bulletForce, ForceMode2D.Impulse);
-            fireTimer = fireInterval;
-        }
-        else if (seePlayer && fireTimer > Mathf.Epsilon)
-        {
-            fireTimer = Mathf.Max(0f, fireTimer - Time.deltaTime);
-        }
+        
     }
 
     private void CheckPlayerProximity()
@@ -74,7 +63,7 @@ public class EnemyShooter : MonoBehaviour
         if (player.gameObject.layer == gameObject.layer)
         {
             // same layer, then check distance
-            if (Vector2.Distance(player.gameObject.transform.position, transform.position) < 
+            if (Vector2.Distance(player.gameObject.transform.position, transform.position) <
                 playerProximityLimit)
             {
                 // player in range

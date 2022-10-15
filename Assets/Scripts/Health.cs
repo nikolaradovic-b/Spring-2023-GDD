@@ -29,6 +29,10 @@ public class Health : MonoBehaviour
                 Debug.Log("Lost!");
                 Destroy(gameObject);
             }
+            else if (GetComponent<KeyCrate>()){
+                GetComponent<KeyCrate>().DeathSequence();
+                Destroy(gameObject);
+            }
             else
             {
                 // Enemy has died

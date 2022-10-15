@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 1910192421407102469}
   - component: {fileID: 1910192421407102489}
   - component: {fileID: 742060976706307456}
-  - component: {fileID: 3055157096655196812}
+  - component: {fileID: -7460164652914848918}
   m_Layer: 20
-  m_Name: Enemy 1
+  m_Name: Bomber
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
---- !u!114 &3055157096655196812
+--- !u!114 &-7460164652914848918
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -174,15 +174,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1910192421407102468}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25b02c565078a2c44950da094e51bf0d, type: 3}
+  m_Script: {fileID: 11500000, guid: 1f06f2f5ab99b4919b86327fd3db87bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firingOrigin: {fileID: 1910192421415882079}
-  bulletPrefab: {fileID: 6954552094790282884, guid: e652e09a23d108841b5114cafca3fb13,
-    type: 3}
+  firingOrigin: {fileID: 0}
+  bulletPrefab: {fileID: 0}
   bulletForce: 20
   fireInterval: 2
-  playerProximityLimit: 5
+  playerProximityLimit: 10
+  speedMultiplier: 2
+  damage: 5
+  hitVFX: {fileID: 8699622481109766837, guid: 44dfc911f4c0a492ca5080f9ee92013c, type: 3}
 --- !u!1 &1910192421415882078
 GameObject:
   m_ObjectHideFlags: 0

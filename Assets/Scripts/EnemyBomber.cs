@@ -23,11 +23,11 @@ public class EnemyBomber : EnemyShooterBase
         if (seePlayer)
         {
             var player = FindObjectOfType<PlayerMovement>();
-            GetComponentInChildren<EnemyMovement>().MoveTo(player.transform.position, speedMultiplier);
+            //GetComponentInChildren<EnemyMovement>().MoveTo(player.transform.position, speedMultiplier);
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
@@ -35,6 +35,7 @@ public class EnemyBomber : EnemyShooterBase
             GameObject vfx = Instantiate(hitVFX, transform.position, Quaternion.identity);
             vfx.layer = gameObject.layer;
             vfx.GetComponent<SpriteRenderer>().sortingLayerName = GetComponent<SpriteRenderer>().sortingLayerName;
+            Destroy(vfx, 5f);
             Destroy(gameObject);
         }
     }

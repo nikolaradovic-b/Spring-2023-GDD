@@ -2,29 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBomber : EnemyShooterBase
+public class EnemyBomber : EnemyBase
 {
-    [SerializeField] private float speedMultiplier = 2f;
-    [SerializeField] private int damage = 5;
     [SerializeField] private GameObject hitVFX = null;
 
     protected override void Start()
     {
         base.Start();
+        attackRange = 0.0f;
+        speedMultiplier = 2.0f;
+        damage = 5;
     }
 
     protected override void Update()
     {
         base.Update();
-    }
-
-    protected override void FirePlayerIfSeen()
-    {
-        if (seePlayer)
-        {
-            var player = FindObjectOfType<PlayerMovement>();
-            GetComponentInChildren<EnemyMovement>().MoveTo(player.transform.position, speedMultiplier);
-        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -37,5 +29,10 @@ public class EnemyBomber : EnemyShooterBase
             vfx.GetComponent<SpriteRenderer>().sortingLayerName = GetComponent<SpriteRenderer>().sortingLayerName;
             Destroy(gameObject);
         }
+    }
+
+    public override string ToString()
+    {
+        return "EnemyBomber";
     }
 }

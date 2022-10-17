@@ -5,12 +5,12 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] private GameObject[] waypoints;
-    [SerializeField] private float patrolSpeed = 5f;
-    [SerializeField] private float arrivalOffsetAllowed = 2f;
+    [SerializeField] private float patrolSpeed = 1.5f;
+    [SerializeField] private float arrivalOffsetAllowed = 0.25f;
 
     private GameObject nextWaypoint;
     private Rigidbody2D rb;
-    private EnemyShooterBase shooter;
+    private EnemyBase enemy;
 
     private int currentWaypointIndex;
     private bool startingMoving = true;
@@ -27,12 +27,12 @@ public class EnemyMovement : MonoBehaviour
         transform.position = initialWaypoint.transform.position;
         nextWaypoint = initialWaypoint;
         rb = GetComponent<Rigidbody2D>();
-        shooter = GetComponent<EnemyShooterBase>();
+        enemy = GetComponent<EnemyBase>();
     }
 
     private void Update()
     {
-        if (shooter.GetIsShooting()) { return; }
+        if (enemy.GetIsAttacking()) { return; }
         float distToNextWaypoint =
             Vector2.Distance(transform.position, nextWaypoint.transform.position);
         if (distToNextWaypoint <= arrivalOffsetAllowed)
@@ -54,8 +54,15 @@ public class EnemyMovement : MonoBehaviour
             MoveTo(nextWaypoint.transform.position, 1f);
         }
         faceDir = (nextWaypoint.transform.position - transform.position).normalized;
-        float angle = Mathf.Atan2(faceDir.y, faceDir.x) * Mathf.Rad2Deg - 90f;
-        rb.rotation = angle;
+        if (enemy.toString() == "EnemyMeleeBase")
+        {
+            enemy.transform.localScale = Mathf.Atan2(faceDir.y, faceDir.x) > 0 ? new Vector3(1.0f, 1.0f, 1.0f) : new Vector3(-1.0f, 1.0f, 1.0f);
+        }
+        else
+        {
+            float angle = Mathf.Atan2(faceDir.y, faceDir.x) * Mathf.Rad2Deg - 90f;
+            rb.rotation = angle;
+        }
     }
 
     public void MoveTo(Vector2 position, float multiplier)
@@ -69,6 +76,6 @@ public class EnemyMovement : MonoBehaviour
     private IEnumerator PauseThenStart()
     {
         yield return null;
-        startingMoving = true;       
+        startingMoving = true;
     }
 }

@@ -56,7 +56,7 @@ public class EnemyMovement : MonoBehaviour
         faceDir = (nextWaypoint.transform.position - transform.position).normalized;
         if (enemy.toString() == "EnemyMeleeBase")
         {
-            enemy.transform.localScale = Mathf.Atan2(faceDir.y, faceDir.x) > 0 ? new Vector3(1.0f, 1.0f, 1.0f) : new Vector3(-1.0f, 1.0f, 1.0f);
+            rb.transform.localScale = Mathf.Atan2(faceDir.y, faceDir.x) > 0 ? new Vector3(1.0f, 1.0f, 1.0f) : new Vector3(-1.0f, 1.0f, 1.0f);
         }
         else
         {

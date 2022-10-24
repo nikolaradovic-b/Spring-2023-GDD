@@ -33,8 +33,18 @@ public class Health : MonoBehaviour
             {
                 // Enemy has died
                 FindObjectOfType<GameManager>().DestroyEnemy();
-                Destroy(gameObject);
+                Destroy(gameObject.transform.parent.gameObject);
             }
         }
+    }
+
+    public float GetCurrentHealth()
+    {
+        return currentHealth;
+    }
+
+    public float GetMaxHealth()
+    {
+        return maxHealth;
     }
 }

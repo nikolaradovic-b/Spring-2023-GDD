@@ -178,7 +178,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firingOrigin: {fileID: 0}
-  bulletPrefab: {fileID: 0}
+  bulletPrefab: {fileID: 6954552094790282884, guid: e652e09a23d108841b5114cafca3fb13,
+    type: 3}
   bulletForce: 20
   fireInterval: 2
   playerProximityLimit: 10

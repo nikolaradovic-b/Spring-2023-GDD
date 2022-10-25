@@ -164,6 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 041042e436581224da407529a6385cef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: {fileID: 0}
 --- !u!1 &6746642968586138466
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,7 +178,7 @@ GameObject:
   - component: {fileID: 3302682965107578130}
   - component: {fileID: 6041742122414575279}
   m_Layer: 20
-  m_Name: Canvas
+  m_Name: Enemy Health Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

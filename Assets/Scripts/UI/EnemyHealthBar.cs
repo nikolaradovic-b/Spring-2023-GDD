@@ -17,7 +17,7 @@ public class EnemyHealthBar : MonoBehaviour
     private void Update()
     {
         var curScale = healthBar.transform.localScale;
-        curScale.x = health.GetCurrentHealth() / health.GetMaxHealth();
+        curScale.x = (float)health.GetCurrentHealth() / (float)health.GetMaxHealth();
         healthBar.transform.localScale = curScale;
     }
 }

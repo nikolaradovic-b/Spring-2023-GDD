@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Health : MonoBehaviour
 {
     [SerializeField] private int maxHealth = 10;
 
     private int currentHealth;
+
+    public static Action<GameObject> onTakeDamage;
 
     private void Start()
     {
@@ -21,6 +24,7 @@ public class Health : MonoBehaviour
     public void TakeDamage(int amount)
     {
         currentHealth = Mathf.Max(0, currentHealth - amount);
+        onTakeDamage?.Invoke(gameObject);
         if (currentHealth == 0)
         {
             if (GetComponent<PlayerMovement>())
@@ -38,12 +42,12 @@ public class Health : MonoBehaviour
         }
     }
 
-    public float GetCurrentHealth()
+    public int GetCurrentHealth()
     {
         return currentHealth;
     }
 
-    public float GetMaxHealth()
+    public int GetMaxHealth()
     {
         return maxHealth;
     }

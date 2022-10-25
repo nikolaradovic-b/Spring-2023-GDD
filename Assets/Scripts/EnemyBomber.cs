@@ -36,7 +36,7 @@ public class EnemyBomber : EnemyShooterBase
             vfx.layer = gameObject.layer;
             vfx.GetComponent<SpriteRenderer>().sortingLayerName = GetComponent<SpriteRenderer>().sortingLayerName;
             Destroy(vfx, 5f);
-            Destroy(gameObject);
+            Destroy(transform.parent.gameObject);
         }
     }
 }

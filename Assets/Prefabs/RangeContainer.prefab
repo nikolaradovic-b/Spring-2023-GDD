@@ -359,6 +359,7 @@ GameObject:
   - component: {fileID: 9132537248080614353}
   - component: {fileID: 7958779018256384084}
   - component: {fileID: 7121754630647371081}
+  - component: {fileID: 7837932239563917070}
   m_Layer: 20
   m_Name: Ranger
   m_TagString: Enemy
@@ -419,7 +420,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1869315837
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: d1c1523651c71449cb32c2c7933acf8c, type: 3}
   m_Color: {r: 0.17438585, g: 0.9528302, b: 0.87437725, a: 1}
@@ -501,7 +502,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 9132537248080614352}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbbf77b8f81473649835f4d757e40f7d, type: 3}
+  m_Script: {fileID: 11500000, guid: 25b02c565078a2c44950da094e51bf0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   firingOrigin: {fileID: 9132537248055576715}
@@ -509,4 +510,18 @@ MonoBehaviour:
     type: 3}
   bulletForce: 20
   fireInterval: 2
-  playerProximityLimit: 2
+  playerProximityLimit: 5
+--- !u!114 &7837932239563917070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9132537248080614352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5403afab20efc9245a9a8329bbfb4e94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashDuration: 0.1
+  flashAlpha: 0.2

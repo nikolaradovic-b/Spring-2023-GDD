@@ -26,8 +26,8 @@ public class EnemyMovement : MonoBehaviour
         GameObject initialWaypoint = waypoints[randomIndex];
         transform.position = initialWaypoint.transform.position;
         nextWaypoint = initialWaypoint;
-        rb = GetComponent<Rigidbody2D>();
-        shooter = GetComponent<EnemyShooterBase>();
+        rb = GetComponentInChildren<Rigidbody2D>();
+        shooter = GetComponentInChildren<EnemyShooterBase>();
     }
 
     private void Update()

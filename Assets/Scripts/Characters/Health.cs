@@ -32,6 +32,11 @@ public class Health : MonoBehaviour
                 // Player has died!
                 Debug.Log("Lost!");
                 Destroy(gameObject);
+                FindObjectOfType<GameManager>().RestartLevel();
+            }
+            else if (GetComponent<KeyCrate>()){
+                GetComponent<KeyCrate>().DeathSequence();
+                Destroy(gameObject);
             }
             else
             {

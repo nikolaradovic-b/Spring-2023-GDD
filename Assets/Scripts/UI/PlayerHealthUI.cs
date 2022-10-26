@@ -18,7 +18,7 @@ public class PlayerHealthUI : MonoBehaviour
     void Update()
     {
         int diff = maxHealth - playerHealth.GetCurrentHealth();
-        for (int i = 0; i < diff; ++i)
+        for (int i = 0; i < maxHealth; ++i)
         {
             if (i < diff)
             {

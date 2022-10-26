@@ -2,15 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBomber : EnemyShooterBase
+public class EnemyBomber : EnemyBase
 {
-    [SerializeField] private float speedMultiplier = 2f;
-    [SerializeField] private int damage = 5;
     [SerializeField] private GameObject hitVFX = null;
 
     protected override void Start()
     {
         base.Start();
+        attackRange = 0.0f;
+        speedMultiplier = 2.0f;
+        damage = 5;
     }
 
     protected override void Update()
@@ -38,5 +39,10 @@ public class EnemyBomber : EnemyShooterBase
             Destroy(vfx, 5f);
             Destroy(transform.parent.gameObject);
         }
+    }
+
+    public override string ToString()
+    {
+        return "EnemyBomber";
     }
 }

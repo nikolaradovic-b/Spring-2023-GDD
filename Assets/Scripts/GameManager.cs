@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     private int enemiesLeft;
+    public bool hasKey = false;
 
     public void RegisterEnemy()
     {
@@ -19,5 +21,16 @@ public class GameManager : MonoBehaviour
             // Player has won!
             Debug.Log("Won!");
         }
+    }
+
+    public void RecieveKey()
+    {
+        hasKey = true;
+        Debug.Log("+1 Key");
+    }
+
+    public void RestartLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

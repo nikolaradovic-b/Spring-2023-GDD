@@ -27,7 +27,8 @@ public class EnemyMovement : MonoBehaviour
         transform.position = initialWaypoint.transform.position;
         nextWaypoint = initialWaypoint;
         rb = GetComponentInChildren<Rigidbody2D>();
-        enemy = GetComponentInChildren<EnemyShooterBase>();
+        // BUG FIX #1 enemy = GetComponentInChildren<EnemyShooterBase>();
+        enemy = GetComponentInChildren<EnemyBase>();
     }
 
     private void Update()
@@ -53,15 +54,32 @@ public class EnemyMovement : MonoBehaviour
             // move to next waypoint
             MoveTo(nextWaypoint.transform.position, 1f);
         }
+
         faceDir = (nextWaypoint.transform.position - transform.position).normalized;
         if (enemy.toString() == "EnemyMeleeBase")
         {
-            rb.transform.localScale = Mathf.Atan2(faceDir.y, faceDir.x) > 0 ? new Vector3(1.0f, 1.0f, 1.0f) : new Vector3(-1.0f, 1.0f, 1.0f);
+            /* BUG FIX #2 rb.transform.localScale = 
+                Mathf.Atan2(faceDir.y, faceDir.x) > 0 ? new Vector3(1.0f, 1.0f, 1.0f) : new Vector3(-1.0f, 1.0f, 1.0f);*/
+            if (faceDir.x < 0)
+            {
+                // make lookDirection.y negative
+                faceDir = new Vector2(faceDir.x, -Mathf.Abs(faceDir.y));
+            }
+            else
+            {
+                // make lookDirection.y positive
+                faceDir = new Vector2(faceDir.x, Mathf.Abs(faceDir.y));
+            }
+            Vector3 currScale = transform.localScale;
+            float scaler = currScale.y;
+            rb.transform.localScale =
+                Mathf.Atan2(faceDir.y, faceDir.x) > 0 ? 
+                new Vector3(-1.0f, 1.0f, 1.0f) * scaler : new Vector3(1.0f, 1.0f, 1.0f) * scaler;
         }
         else
         {
-            float angle = Mathf.Atan2(faceDir.y, faceDir.x) * Mathf.Rad2Deg - 90f;
-            rb.rotation = angle;
+            //float angle = Mathf.Atan2(faceDir.y, faceDir.x) * Mathf.Rad2Deg - 90f;
+            //rb.rotation = angle;
         }
     }
 

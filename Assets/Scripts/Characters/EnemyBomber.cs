@@ -19,12 +19,17 @@ public class EnemyBomber : EnemyBase
         base.Update();
     }
 
+    protected override void FollowPLayerIfSeen()
+    {
+
+    }
+
     protected override void FirePlayerIfSeen()
     {
         if (seePlayer)
         {
             var player = FindObjectOfType<PlayerMovement>();
-            //GetComponentInChildren<EnemyMovement>().MoveTo(player.transform.position, speedMultiplier);
+            //transform.parent.GetComponent<EnemyMovement>().MoveTo(player.transform.position, speedMultiplier);
         }
     }
 

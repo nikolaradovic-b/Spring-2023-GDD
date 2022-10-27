@@ -8,10 +8,13 @@ public class SpriteFlash : MonoBehaviour
     [SerializeField] private float flashAlpha = 0.2f;
 
     private SpriteRenderer spriteRenderer;
+    private float originalAlpha;
 
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        Color currColor = spriteRenderer.color;
+        originalAlpha = currColor.a;
     }
 
     private void OnEnable()
@@ -35,7 +38,6 @@ public class SpriteFlash : MonoBehaviour
     private IEnumerator Blink()
     {
         Color currColor = spriteRenderer.color;
-        float originalAlpha = currColor.a;
         currColor.a = flashAlpha;
         spriteRenderer.color = currColor;
         yield return new WaitForSeconds(flashDuration);

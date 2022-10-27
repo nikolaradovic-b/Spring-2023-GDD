@@ -48,7 +48,8 @@ public class EnemyBase : MonoBehaviour
             {
                 // player in range
                 seePlayer = true;
-                attacking = distance < attackRange;
+                // BUG FIX #3 attacking = distance < attackRange;
+                attacking = true;
                 return;
             }
         }
@@ -63,8 +64,25 @@ public class EnemyBase : MonoBehaviour
             Debug.Log("See!");
             Vector2 playerPos = player.gameObject.transform.position;
             Vector2 lookDirection = playerPos - rb.position;
-            float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg - 90f;
-            rb.rotation = angle;
+            //float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg - 90f;
+            //rb.rotation = angle;
+
+            // BUG FIX #7
+            if (lookDirection.x < 0)
+            {
+                // make lookDirection.y negative
+                lookDirection = new Vector2(lookDirection.x, -Mathf.Abs(lookDirection.y));
+            }
+            else
+            {
+                // make lookDirection.y positive
+                lookDirection = new Vector2(lookDirection.x, Mathf.Abs(lookDirection.y));
+            }
+            Vector3 currScale = transform.localScale;
+            float scaler = currScale.y;
+            transform.localScale =
+                Mathf.Atan2(lookDirection.y, lookDirection.x) > 0 ?
+                new Vector3(-1.0f, 1.0f, 1.0f) * scaler : new Vector3(1.0f, 1.0f, 1.0f) * scaler;
         }
     }
 
@@ -73,7 +91,7 @@ public class EnemyBase : MonoBehaviour
         if (seePlayer && Vector2.Distance(player.transform.position, transform.position) > attackRange)
         {
             var player = FindObjectOfType<PlayerMovement>();
-            GetComponentInChildren<EnemyMovement>().MoveTo(player.transform.position, speedMultiplier);
+            transform.parent.GetComponent<EnemyMovement>().MoveTo(player.transform.position, speedMultiplier);
         }
     }
 

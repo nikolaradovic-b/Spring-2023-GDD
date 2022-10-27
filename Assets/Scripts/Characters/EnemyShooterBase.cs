@@ -22,9 +22,13 @@ public abstract class EnemyShooterBase : EnemyBase{
         if (seePlayer && fireTimer <= Mathf.Epsilon)
         {
             Debug.Log("Fire!");
+            var fireDir = (player.transform.position - transform.position).normalized;
             GameObject bulletInstance = Instantiate(bulletPrefab, firingOrigin.position, firingOrigin.rotation);
+            float angle = Mathf.Atan2(fireDir.y, fireDir.x) * Mathf.Rad2Deg - 90f;
             Rigidbody2D rb = bulletInstance.GetComponent<Rigidbody2D>();
-            rb.AddForce(-1 * firingOrigin.up * bulletForce, ForceMode2D.Impulse);
+            rb.AddForce(fireDir * bulletForce, ForceMode2D.Impulse);
+            rb.rotation = angle;
+            //rb.AddForce(-1 * firingOrigin.up * bulletForce, ForceMode2D.Impulse);
             fireTimer = fireInterval;
         }
         else if (seePlayer && fireTimer > Mathf.Epsilon)

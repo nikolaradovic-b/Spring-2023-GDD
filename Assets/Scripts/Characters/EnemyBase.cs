@@ -38,7 +38,7 @@ public class EnemyBase : MonoBehaviour
         FirePlayerIfSeen();
     }
 
-    private void CheckPlayerProximity()
+    protected virtual void CheckPlayerProximity()
     {
         if (player.gameObject.layer == gameObject.layer)
         {
@@ -48,7 +48,6 @@ public class EnemyBase : MonoBehaviour
             {
                 // player in range
                 seePlayer = true;
-                // BUG FIX #3 attacking = distance < attackRange;
                 attacking = true;
                 return;
             }
@@ -67,7 +66,6 @@ public class EnemyBase : MonoBehaviour
             //float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg - 90f;
             //rb.rotation = angle;
 
-            // BUG FIX #7
             if (lookDirection.x < 0)
             {
                 // make lookDirection.y negative
@@ -91,7 +89,7 @@ public class EnemyBase : MonoBehaviour
         if (seePlayer && Vector2.Distance(player.transform.position, transform.position) > attackRange)
         {
             var player = FindObjectOfType<PlayerMovement>();
-            transform.parent.GetComponent<EnemyMovement>().MoveTo(player.transform.position, speedMultiplier);
+            transform.parent.GetComponent<EnemyMovement>().MoveTo(player.transform, speedMultiplier);
         }
     }
 
@@ -99,6 +97,7 @@ public class EnemyBase : MonoBehaviour
     {
 
     }
+
     public bool GetIsAttacking()
     {
         return attacking;

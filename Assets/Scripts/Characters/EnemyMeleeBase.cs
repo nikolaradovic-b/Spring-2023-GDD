@@ -27,17 +27,10 @@ public class EnemyMeleeBase : EnemyBase
     {
         base.FollowPLayerIfSeen();
         m_animator.SetInteger("AnimState", 2);
-
-        /* BUG FIX #4 float distance = Vector3.Distance(rb.transform.position, prevPosition);
-        if (Mathf.Abs(distance) > Mathf.Abs(firingOrigin.position.x))
-        {
-            m_animator.SetInteger("AnimState", 2);
-        }*/
     }
 
     protected override void FirePlayerIfSeen()
     {
-        // BUG FIX #5
         float distance = Vector3.Distance(transform.position, player.transform.position);
 
         if (attacking && fireTimer <= Mathf.Epsilon && distance <= attackRange)

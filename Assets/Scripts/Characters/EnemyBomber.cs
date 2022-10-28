@@ -1,3 +1,4 @@
+using Pathfinding;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,8 @@ using UnityEngine;
 public class EnemyBomber : EnemyBase
 {
     [SerializeField] private GameObject hitVFX = null;
+
+    private bool lockOn = false;
 
     protected override void Start()
     {
@@ -19,17 +22,30 @@ public class EnemyBomber : EnemyBase
         base.Update();
     }
 
-    protected override void FollowPLayerIfSeen()
+    protected override void CheckPlayerProximity()
     {
-
+        // check if bomber has locked onto player
+        if (lockOn)
+        {
+            seePlayer = true;
+            attacking = true;
+        }
+        else
+        {
+            base.CheckPlayerProximity();
+        }
     }
 
-    protected override void FirePlayerIfSeen()
+    protected override void FollowPLayerIfSeen()
     {
         if (seePlayer)
         {
-            var player = FindObjectOfType<PlayerMovement>();
-            //transform.parent.GetComponent<EnemyMovement>().MoveTo(player.transform.position, speedMultiplier);
+            lockOn = true;
+        }
+        if (lockOn)
+        {
+            // Chase player
+            transform.parent.GetComponent<AIDestinationSetter>().target = player.transform;
         }
     }
 

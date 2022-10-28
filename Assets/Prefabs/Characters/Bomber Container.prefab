@@ -277,6 +277,7 @@ GameObject:
   - component: {fileID: 780126227167333103}
   - component: {fileID: 4641768987258466827}
   - component: {fileID: 7128852986034198178}
+  - component: {fileID: 8574872340125395009}
   m_Layer: 20
   m_Name: Bomber Container
   m_TagString: Untagged
@@ -384,6 +385,21 @@ MonoBehaviour:
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0
   constrainInsideGraph: 0
+--- !u!114 &8574872340125395009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7223518574769766588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6161f1c0dcd4ff249a4700b2380c5c15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypoints: []
+  patrolSpeed: 1.5
+  arrivalOffsetAllowed: 0.25
 --- !u!1 &9132537248055576714
 GameObject:
   m_ObjectHideFlags: 0
@@ -576,7 +592,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firingOrigin: {fileID: 0}
   fireInterval: 2
-  playerProximityLimit: 10
+  playerProximityLimit: 5
   speedMultiplier: 2
   attackRange: 7
   damage: 5

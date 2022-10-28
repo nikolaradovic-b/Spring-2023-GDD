@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathfinding;
 
 public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] private GameObject[] waypoints;
     [SerializeField] private float patrolSpeed = 1.5f;
     [SerializeField] private float arrivalOffsetAllowed = 0.25f;
+    [SerializeField] private float pauseTime = 2f;
 
     private GameObject nextWaypoint;
     private Rigidbody2D rb;
@@ -27,7 +29,6 @@ public class EnemyMovement : MonoBehaviour
         transform.position = initialWaypoint.transform.position;
         nextWaypoint = initialWaypoint;
         rb = GetComponentInChildren<Rigidbody2D>();
-        // BUG FIX #1 enemy = GetComponentInChildren<EnemyShooterBase>();
         enemy = GetComponentInChildren<EnemyBase>();
     }
 
@@ -52,14 +53,12 @@ public class EnemyMovement : MonoBehaviour
         else if (startingMoving)
         {
             // move to next waypoint
-            MoveTo(nextWaypoint.transform.position, 1f);
+            MoveTo(nextWaypoint.transform, 1f);
         }
 
         faceDir = (nextWaypoint.transform.position - transform.position).normalized;
         if (enemy.toString() == "EnemyMeleeBase")
         {
-            /* BUG FIX #2 rb.transform.localScale = 
-                Mathf.Atan2(faceDir.y, faceDir.x) > 0 ? new Vector3(1.0f, 1.0f, 1.0f) : new Vector3(-1.0f, 1.0f, 1.0f);*/
             if (faceDir.x < 0)
             {
                 // make lookDirection.y negative
@@ -83,17 +82,19 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    public void MoveTo(Vector2 position, float multiplier)
+    public void MoveTo(Transform position, float multiplier)
     {
-        transform.position = Vector2.MoveTowards(
+        GetComponent<AIDestinationSetter>().target = position;
+        GetComponent<AIPath>().maxSpeed = patrolSpeed * multiplier;
+       /* transform.position = Vector2.MoveTowards(
                 transform.position,
                 position,
-                Time.deltaTime * patrolSpeed * multiplier);
+                Time.deltaTime * patrolSpeed * multiplier);*/
     }
 
     private IEnumerator PauseThenStart()
     {
-        yield return null;
+        yield return new WaitForSeconds(pauseTime);
         startingMoving = true;
     }
 }

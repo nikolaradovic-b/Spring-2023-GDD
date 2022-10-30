@@ -8,12 +8,16 @@ public class Health : MonoBehaviour
     [SerializeField] private int maxHealth = 10;
 
     private int currentHealth;
+    private bool immuneState;
+    private float immuneTimer;
+    private float immuneDuration;
 
     public static Action<GameObject> onTakeDamage;
 
     private void Start()
     {
         currentHealth = maxHealth;
+        immuneState = false;
     }
 
     public void Heal(int amount)
@@ -23,6 +27,16 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
+        if (immuneState && immuneTimer <= Mathf.Epsilon)
+        {
+            amount = 0;
+            Debug.Log("Is Immune!");
+        }
+        else if (immuneState && immuneTimer > Mathf.Epsilon)
+        {
+            immuneTimer = Mathf.Max(0f, immuneTimer - Time.deltaTime);
+        }
+
         currentHealth = Mathf.Max(0, currentHealth - amount);
         onTakeDamage?.Invoke(gameObject);
         if (currentHealth == 0)
@@ -34,7 +48,8 @@ public class Health : MonoBehaviour
                 Destroy(gameObject);
                 FindObjectOfType<GameManager>().RestartLevel();
             }
-            else if (GetComponent<KeyCrate>()){
+            else if (GetComponent<KeyCrate>())
+            {
                 GetComponent<KeyCrate>().DeathSequence();
                 Destroy(gameObject);
             }
@@ -44,6 +59,16 @@ public class Health : MonoBehaviour
                 FindObjectOfType<GameManager>().DestroyEnemy();
                 Destroy(gameObject.transform.parent.gameObject);
             }
+        }
+    }
+
+    public void setImmuneState(bool state)
+    {
+        if (state)
+        {
+            Debug.Log("Immune applied!");
+            immuneState = state;
+            immuneTimer = immuneDuration;
         }
     }
 

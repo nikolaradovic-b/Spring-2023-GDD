@@ -9,7 +9,6 @@ public abstract class EnemyShooterBase : EnemyBase{
     protected override void Start()
     {
         base.Start();
-        damage = 1;
     }
 
     protected override void Update()

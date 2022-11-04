@@ -10,7 +10,7 @@ public class Health : MonoBehaviour
     private int currentHealth;
     private bool immuneState;
     private float immuneTimer;
-    private float immuneDuration;
+    private float immuneDuration = 2.0f;
 
     public static Action<GameObject> onTakeDamage;
 

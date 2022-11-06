@@ -11,6 +11,7 @@ public class AddAmmo : MonoBehaviour
         if (collision.gameObject.GetComponent<Shooter>())
         {
             collision.gameObject.GetComponent<Shooter>().Reload(20);
+            collision.gameObject.GetComponent<Minigun>().Reload(50);
             Destroy(gameObject);
         }
     }

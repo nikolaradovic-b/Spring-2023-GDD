@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 3070283929515845451}
   - component: {fileID: 7649259413947932004}
   - component: {fileID: 6180221715063613862}
-  - component: {fileID: 2707257475630114349}
   m_Layer: 20
   m_Name: Player
   m_TagString: Player
@@ -157,7 +156,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3070283929515845445}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b07ebb922cb7dff42a2a4212f0c96bd0, type: 3}
   m_Name: 
@@ -165,12 +164,6 @@ MonoBehaviour:
   firingOrigin: {fileID: 3070283929601844694}
   bulletPrefab: {fileID: 6954552094790282884, guid: 48a101623590c1748b7a5f87d60325ed,
     type: 3}
-  bulletForce: 20
-  ammo: 20
-  maxAmmo: 20
-  rechargeRate: 1
-  rechargeDelay: 5
-  chargeDelay: 1
 --- !u!114 &7649259413947932004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,25 +191,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flashDuration: 0.1
   flashAlpha: 0.2
---- !u!114 &2707257475630114349
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3070283929515845445}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: edf9fc004d9834e63b3a89541d6b7628, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  firingOrigin: {fileID: 3070283929601844694}
-  bulletPrefab: {fileID: 6954552094790282884, guid: 87dc827b2fe2b488b988f63584d7d805,
-    type: 3}
-  bulletForce: 20
-  ammo: 100
-  maxAmmo: 100
-  fireDelay: 0.3
 --- !u!1 &3070283929601844693
 GameObject:
   m_ObjectHideFlags: 0

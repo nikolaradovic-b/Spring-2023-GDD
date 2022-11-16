@@ -9,18 +9,27 @@ public class Shooter : MonoBehaviour
     private Gun currentGun;
 
     private void Start() {
-        currentGun = new Pistol(firingOrigin, bulletPrefab);
+        currentGun = new Minigun(firingOrigin, bulletPrefab);
     }
 
     private void Update() {
         currentGun.Update();
+        Debug.Log(currentGun.ammoCount());
     }
 
     public void Reload() {
-        currentGun.ammo = currentGun.Reload(currentGun.ammo, currentGun.reloadAmount, currentGun.maxAmmo);
+        currentGun.Reload();
     }
 
-    public void Switch(Gun newGun) {
-        currentGun = newGun;
+    public void switchMinigun() {
+        currentGun = new Minigun(firingOrigin, bulletPrefab);
+    }
+
+    public void switchPistol() {
+        currentGun = new Pistol(firingOrigin, bulletPrefab);
+    }
+
+    public int ammoCount() {
+        return currentGun.ammoCount();
     }
 }

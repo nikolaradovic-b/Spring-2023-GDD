@@ -14,8 +14,12 @@ public class Gun : MonoBehaviour
         //to be overwritten
     }
 
-    public int Reload(int ammo, int amount, int maxAmmo)
+    public virtual void Reload()
     {
-        return Mathf.Min(ammo + amount, maxAmmo);
+        ammo = Mathf.Min(ammo + reloadAmount, maxAmmo);
+    }
+
+    public virtual int ammoCount() {
+        return ammo;
     }
 }

@@ -11,8 +11,8 @@ public class Pistol : Gun
     public new int maxAmmo = 20;
     private int rechargeRate = 1;
     private int rechargeDelay = 5;
-    private int chargeDelay = 1;
-    public new int reloadAmount = 20;
+    private float chargeDelay = 0.5f;
+    public new int reloadAmount = 10;
 
     private float rechargeStart = 0f;
 
@@ -55,5 +55,13 @@ public class Pistol : Gun
             rechargeStart = Time.time + chargeDelay;
             Debug.Log("+1 Ammo");
         }
+    }
+
+    public override void Reload() {
+        ammo = Mathf.Min(ammo + reloadAmount, maxAmmo);
+    }
+
+    public override int ammoCount() {
+        return ammo;
     }
 }

@@ -9,7 +9,7 @@ public class Minigun : Gun
     public float bulletForce = 20f;
     public new int ammo = 100;
     public new int maxAmmo = 100;
-    private float fireDelay = 0.5f;
+    private float fireDelay = 0.05f;
     public new int reloadAmount = 50;
 
     private float fireDelayStart = 0f;
@@ -42,5 +42,13 @@ public class Minigun : Gun
         rb.AddForce(-1 * firingOrigin.up * bulletForce, ForceMode2D.Impulse);
         ammo -= 1;
         fireDelayStart = Time.time + fireDelay;
+    }
+
+    public override void Reload() {
+        ammo = Mathf.Min(ammo + reloadAmount, maxAmmo);
+    }
+
+    public override int ammoCount() {
+        return ammo;
     }
 }

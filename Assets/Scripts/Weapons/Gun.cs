@@ -22,4 +22,12 @@ public class Gun : MonoBehaviour
     public virtual int ammoCount() {
         return ammo;
     }
+
+    public virtual int maxAmmoCount() {
+        return maxAmmo;
+    }
+
+    public virtual void drop() {
+        //to be overriden
+    }
 }

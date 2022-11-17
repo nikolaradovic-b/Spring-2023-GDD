@@ -3,44 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 
-// public class EnemyShaman : EnemyBase{
-
-//     protected EnemyShooterBase enemy;
-//     protected override void Start()
-//     {
-//         speedMultiplier = 1.50f;
-//         attackRange = 2.5f;
-//         fireInterval = 1.0f;
-//         enemy = FindObjectOfType<EnemyShooterBase>();
-//         base.Start();
-//     }
-
-//     protected override void Update()
-//     {
-//         base.Update();
-//     }
-
-//     protected override void FollowPLayerIfSeen()
-//     {   
-//         Debug.Log(enemy);
-//         Debug.Log(Vector2.Distance(enemy.transform.position, this.transform.position));
-//         //If not near enemy
-    
-//         // else
-//             // stay near enemy
-//     }
-
-//     public override string toString(){
-//         return "EnemyShaman";
-//     }
-
-// }   
-
 public class EnemyShaman : EnemyShooterBase{
 
     List<EnemyShooterBase> enemies = new List<EnemyShooterBase>();
     EnemyShooterBase closest;
-    public float offset = 1.0f;
 
     protected override void Start()
     {
@@ -69,7 +35,7 @@ public class EnemyShaman : EnemyShooterBase{
         ----------------------*/
         
         /* Follows closest enemy */
-        transform.parent.GetComponent<AIDestinationSetter>().target = closestWithOffset;
+        transform.parent.GetComponent<AIDestinationSetter>().target = closest.transform;
     }
 
     private void determineClosest(){

@@ -10,6 +10,8 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] protected float speedMultiplier = 1.0f;
     [SerializeField] protected float attackRange = 7.0f;
     [SerializeField] protected int damage = 0;
+    [SerializeField] protected int healDelay = 1;
+    [SerializeField] protected int healRate = 1;
 
     protected Rigidbody2D rb;
     protected PlayerMovement player;
@@ -17,6 +19,8 @@ public class EnemyBase : MonoBehaviour
     protected bool seePlayer = false;
     protected float fireTimer;
     protected bool attacking = false;
+
+    private float healStart = 0f;
 
     protected virtual void Start()
     {
@@ -33,6 +37,12 @@ public class EnemyBase : MonoBehaviour
         }
 
         CheckPlayerProximity();
+        if (!attacking){
+            if (Time.time > healStart) {
+            GetComponent<Health>().Heal(healRate);
+            healStart = healStart + healDelay;
+            }
+        }
         FacePlayerIfSeen();
         FollowPLayerIfSeen();
         FirePlayerIfSeen();

@@ -10,7 +10,7 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] protected float speedMultiplier = 1.0f;
     [SerializeField] protected float attackRange = 7.0f;
     [SerializeField] protected int damage = 0;
-    [SerializeField] protected int healDelay = 1;
+    [SerializeField] protected int healDelay = 2;
     [SerializeField] protected int healRate = 1;
 
     protected Rigidbody2D rb;

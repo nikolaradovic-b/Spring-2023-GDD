@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private float maxMoveSpeed = 6f;
     [SerializeField] private float moveSpeed = 5f;
 
     private Rigidbody2D rb;
@@ -19,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void SpeedUp(int amount)
     {
-        moveSpeed += amount;
+        moveSpeed = Mathf.Min(moveSpeed + amount, maxMoveSpeed);
     }
 
     private void Update()

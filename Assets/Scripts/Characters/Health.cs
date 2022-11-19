@@ -6,14 +6,20 @@ using System;
 public class Health : MonoBehaviour
 {
     [SerializeField] private int maxHealth = 10;
+    [SerializeField] private float immunityDuration = 5f;
+    [Range(0f, 1f)][SerializeField] private float immuneAlpha = 0.3f;
+    [SerializeField] private int coinRewardOnDie = 10;
 
     private int currentHealth;
+    private bool immune = false;
+    private SpriteRenderer rend;
 
     public static Action<GameObject> onTakeDamage;
 
     private void Start()
     {
         currentHealth = maxHealth;
+        rend = GetComponent<SpriteRenderer>();
     }
 
     public void Heal(int amount)
@@ -21,10 +27,34 @@ public class Health : MonoBehaviour
         currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
     }
 
+    public void SetImmune()
+    {
+        immune = true;
+        var color = rend.color;
+        color.a = immuneAlpha;
+        rend.color = color;
+        // Set immune to false after a duration
+        Invoke(nameof(ResetImmune), immunityDuration);
+    }
+
+    private void ResetImmune()
+    {
+        immune = false;
+        var color = rend.color;
+        color.a = 1f;
+        rend.color = color;
+    }
+
     public void TakeDamage(int amount)
     {
+        if (immune)
+        {
+            return;
+        }
+
         currentHealth = Mathf.Max(0, currentHealth - amount);
         onTakeDamage?.Invoke(gameObject);
+
         if (currentHealth == 0)
         {
             if (GetComponent<PlayerMovement>())
@@ -34,7 +64,8 @@ public class Health : MonoBehaviour
                 Destroy(gameObject);
                 FindObjectOfType<GameManager>().RestartLevel();
             }
-            else if (GetComponent<KeyCrate>()){
+            else if (GetComponent<KeyCrate>())
+            {
                 GetComponent<KeyCrate>().DeathSequence();
                 Destroy(gameObject);
             }
@@ -42,6 +73,7 @@ public class Health : MonoBehaviour
             {
                 // Enemy has died
                 FindObjectOfType<GameManager>().DestroyEnemy();
+                FindObjectOfType<Inventory>().GainCoins(coinRewardOnDie);
                 Destroy(gameObject.transform.parent.gameObject);
             }
         }

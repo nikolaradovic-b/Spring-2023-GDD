@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class AmmoCountUI : MonoBehaviour
 {
-    [SerializeField] private Text ammoDisplay;
+    [SerializeField] private TextMeshProUGUI ammoDisplay;
     private Sprite activeGun;
     private Shooter shooter;
 
@@ -14,7 +14,8 @@ public class AmmoCountUI : MonoBehaviour
     }
 
     private void Update() {
-        ammoDisplay.text = shooter.ammoCount() + "/" + shooter.maxAmmoCount();
+        ammoDisplay.text = "Ammo: " + shooter.ammoCount().ToString()
+            + "/" + shooter.maxAmmoCount().ToString();
     }
 }
 

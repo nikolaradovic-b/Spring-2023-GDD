@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class PickUpMinigun : MonoBehaviour
 {
-    private float timer = 1f;
-
-    private void Start() {
-        timer += Time.time;
-    }
+    private bool firstTime = true;
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (Time.time < timer) { return; }
+        if (firstTime)
+        {
+            firstTime = false;
+            return;
+        }
 
         if (collision.gameObject.GetComponent<Shooter>())
         {
-            collision.gameObject.GetComponent<Shooter>().switchMinigun();
             Destroy(gameObject);
+            collision.gameObject.GetComponent<Shooter>().switchMinigun();
         }
     }
 }

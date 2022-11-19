@@ -28893,6 +28893,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9132537248080614352, guid: 633d0af8274dd174ca68f8fc5fdb52dc,
         type: 3}
+      propertyPath: m_Name
+      value: Shaman Test
+      objectReference: {fileID: 0}
+    - target: {fileID: 9132537248080614352, guid: 633d0af8274dd174ca68f8fc5fdb52dc,
+        type: 3}
       propertyPath: m_Layer
       value: 21
       objectReference: {fileID: 0}

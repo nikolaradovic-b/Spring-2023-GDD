@@ -11,7 +11,9 @@ public class Health : MonoBehaviour
     [SerializeField] private int coinRewardOnDie = 10;
 
     private int currentHealth;
-    private bool immune = false;
+    private bool immuneState = false;
+    private float immuneTimer;
+    private float immuneDuration = 2.0f;
     private SpriteRenderer rend;
 
     public static Action<GameObject> onTakeDamage;
@@ -20,6 +22,12 @@ public class Health : MonoBehaviour
     {
         currentHealth = maxHealth;
         rend = GetComponent<SpriteRenderer>();
+    }
+
+    private void Update(){
+        if (immuneTimer > Mathf.Epsilon){
+            immuneTimer = Mathf.Max(0f, immuneTimer - Time.deltaTime);
+        }
     }
 
     public void Heal(int amount)
@@ -47,9 +55,11 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
-        if (immune)
-        {
-            return;
+        if(immuneState && immuneTimer > Mathf.Epsilon){
+            amount = 0;
+        } else {
+            immuneState = false;
+            immuneTimer = 0f;
         }
 
         currentHealth = Mathf.Max(0, currentHealth - amount);
@@ -77,6 +87,12 @@ public class Health : MonoBehaviour
                 Destroy(gameObject.transform.parent.gameObject);
             }
         }
+    }
+
+    public void setImmuneState()
+    {
+        immuneState = true;
+        immuneTimer = immuneDuration;
     }
 
     public int GetCurrentHealth()

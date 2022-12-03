@@ -318,6 +318,7 @@ MonoBehaviour:
   - {fileID: 0}
   patrolSpeed: 1.5
   arrivalOffsetAllowed: 0.25
+  pauseTime: 2
 --- !u!114 &6511256427733959149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -580,6 +581,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
+  immunityDuration: 5
+  immuneAlpha: 0.3
+  coinRewardOnDie: 10
 --- !u!114 &7121754630647371081
 MonoBehaviour:
   m_ObjectHideFlags: 0

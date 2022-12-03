@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PollingMachina : MonoBehaviour
+public class PatrolState : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()

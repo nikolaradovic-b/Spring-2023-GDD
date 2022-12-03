@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMeleeBase : EnemyBase
+public class EnemyMelee : EnemyBase
 {
     protected Animator m_animator;
     private float attackRadius;

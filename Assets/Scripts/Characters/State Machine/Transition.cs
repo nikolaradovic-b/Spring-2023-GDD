@@ -2,32 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
 public enum TransitionCondition
 {
     SeePlayer,
-
 }
 
 [System.Serializable]
-public struct AND
+public struct ConditionContainer
 {
-    public TransitionCondition[] condition;
+    public TransitionCondition cond;
+    public bool negated;
 }
 
 [System.Serializable]
 public struct OR
 {
-    public AND[] ands;
+    public ConditionContainer[] ands;
 }
 
+[CreateAssetMenu(menuName = "StateMachine/Transition")]
 public class Transition : ScriptableObject
 {
     [SerializeField] private OR[] conditions;
     [SerializeField] private State targetState;
 
-    public bool IsTriggered()
+    private GameObject objChecked;
+
+    public bool IsTriggered(GameObject obj)
     {
+        objChecked = obj;
         foreach (var or in conditions)
         {
             // Evaluate the OR condition
@@ -57,13 +60,22 @@ public class Transition : ScriptableObject
         return true;
     }
 
-    private bool EvaluateAnd(AND andCond)
+    private bool EvaluateAnd(ConditionContainer andCond)
     {
-        switch (andCond.condition)
+        switch (andCond.cond)
         {
             // Reference world states to handle each condition type!
-
+            case TransitionCondition.SeePlayer:
+                if (andCond.negated)
+                {
+                    return !PollingMachine.Instance.CanSeePlayer(objChecked);
+                }
+                else
+                {
+                    return PollingMachine.Instance.CanSeePlayer(objChecked);
+                }
+            default:
+                return false;
         }
-        return true;
     }
 }

@@ -12,6 +12,16 @@ public class GameManager : MonoBehaviour
     private bool shopOn = false;
     public int minigunAmmo = 50;
 
+    public static GameManager Instance;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.F))

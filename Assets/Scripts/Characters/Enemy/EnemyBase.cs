@@ -32,10 +32,10 @@ public class EnemyBase : MonoBehaviour
             return;
         }
 
-        CheckPlayerProximity();
+        //CheckPlayerProximity();
         FacePlayerIfSeen();
         FollowPLayerIfSeen();
-        FirePlayerIfSeen();
+        //FirePlayerIfSeen();
     }
 
     protected virtual void CheckPlayerProximity()
@@ -98,10 +98,15 @@ public class EnemyBase : MonoBehaviour
 
     }
 
-    public bool GetIsAttacking()
+    public virtual void ExecuteFireState()
+    {
+
+    }
+
+/*    public bool GetIsAttacking()
     {
         return attacking;
-    }
+    }*/
 
     public virtual string toString()
     {

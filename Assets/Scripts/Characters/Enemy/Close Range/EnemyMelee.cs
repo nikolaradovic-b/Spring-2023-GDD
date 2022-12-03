@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class EnemyMelee : EnemyBase
 {
+    [SerializeField] private int attackDamage = 3;
+
     protected Animator m_animator;
-    private float attackRadius;
-    private Vector3 prevPosition;
+    /*private float attackRadius;
+    private Vector3 prevPosition;*/
 
 
     protected override void Start()
     {
         m_animator = GetComponent<Animator>();
         base.Start();
-        fireInterval = 2.0f;
-        damage = 2;
-        prevPosition = transform.position;
+        //prevPosition = transform.position;
     }
 
     protected override void Update()
@@ -23,14 +23,15 @@ public class EnemyMelee : EnemyBase
         base.Update();
     }
 
-    protected override void FollowPLayerIfSeen()
+    public override void ExecuteChaseState()
     {
-        base.FollowPLayerIfSeen();
+        base.ExecuteChaseState();
         m_animator.SetInteger("AnimState", 2);
     }
 
-    protected override void FirePlayerIfSeen()
+    public override void ExecuteFireState()
     {
+        base.ExecuteFireState();
         float distance = Vector3.Distance(transform.position, player.transform.position);
 
         if (attacking && fireTimer <= Mathf.Epsilon && distance <= attackRange)
@@ -54,14 +55,9 @@ public class EnemyMelee : EnemyBase
             if (hit.GetComponent<PlayerMovement>())
             {
                 Debug.Log("Melee Hit!");
-                player.GetComponent<Health>().TakeDamage(damage);
+                player.GetComponent<Health>().TakeDamage(attackDamage);
             }
         }
-    }
-
-    void OnDrawGizmosSelected(){
-        if(firingOrigin == null) return;
-        Gizmos.DrawWireSphere(firingOrigin.position, attackRadius);
     }
 
     public override string toString()

@@ -278,6 +278,7 @@ GameObject:
   - component: {fileID: 4641768987258466827}
   - component: {fileID: 7128852986034198178}
   - component: {fileID: 8574872340125395009}
+  - component: {fileID: 7855625382483764037}
   m_Layer: 20
   m_Name: Bomber Container
   m_TagString: Untagged
@@ -399,7 +400,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waypoints: []
   patrolSpeed: 1.5
+  chaseMultiplier: 2
   arrivalOffsetAllowed: 0.25
+  pauseTime: 2
+--- !u!114 &7855625382483764037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7223518574769766588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53cee9cf049a4164dbfe51dae758cfff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialState: {fileID: 11400000, guid: 1a20771f28414444fba808e8f88445d6, type: 2}
 --- !u!1 &9132537248055576714
 GameObject:
   m_ObjectHideFlags: 0
@@ -578,6 +594,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
+  immunityDuration: 5
+  immuneAlpha: 0.3
+  coinRewardOnDie: 10
 --- !u!114 &6974855871162752129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -591,12 +610,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firingOrigin: {fileID: 0}
-  fireInterval: 2
-  playerProximityLimit: 5
-  speedMultiplier: 2
-  attackRange: 7
-  damage: 5
+  fireInterval: 0
+  seePlayerRange: 5
+  attackRange: 0
   hitVFX: {fileID: 8699622481109766837, guid: 7439d0ef06103c94586d875be5b5dc5e, type: 3}
+  explosionDamage: 5
 --- !u!114 &918637690135768591
 MonoBehaviour:
   m_ObjectHideFlags: 0

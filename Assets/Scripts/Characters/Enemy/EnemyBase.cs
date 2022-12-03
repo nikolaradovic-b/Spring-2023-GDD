@@ -8,7 +8,6 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] protected float fireInterval = 2.0f;
     [SerializeField] protected float seePlayerRange = 7f;
     [SerializeField] protected float attackRange = 5.0f;
-    [SerializeField] protected int damage = 0;
 
     protected Rigidbody2D rb;
     protected PlayerMovement player;

@@ -17259,8 +17259,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bec4aacb6c8d24b47a04150c9c0075d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerProximityLimit: 7
-  attackRange: 5
 --- !u!4 &1179676129
 Transform:
   m_ObjectHideFlags: 0

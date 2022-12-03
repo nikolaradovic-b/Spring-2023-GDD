@@ -10,7 +10,7 @@ public class EnemyShaman : EnemyShooterBase{
 
     protected override void Start()
     {
-        speedMultiplier = 1.50f;
+        //speedMultiplier = 1.50f;
         attackRange = 2.5f;
         fireInterval = 1.0f;
         determineClosest();

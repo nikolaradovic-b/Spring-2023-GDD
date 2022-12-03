@@ -13,7 +13,7 @@ public class EnemyBomber : EnemyBase
     {
         base.Start();
         attackRange = 0.0f;
-        speedMultiplier = 2.0f;
+        //speedMultiplier = 2.0f;
         damage = 5;
     }
 

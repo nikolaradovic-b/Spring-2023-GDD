@@ -6,13 +6,13 @@ public class EnemyBase : MonoBehaviour
 {
     [SerializeField] protected Transform firingOrigin = null;
     [SerializeField] protected float fireInterval = 2.0f;
-    [SerializeField] protected float playerProximityLimit = 10.0f;
-    [SerializeField] protected float speedMultiplier = 1.0f;
-    [SerializeField] protected float attackRange = 7.0f;
+    [SerializeField] protected float seePlayerRange = 7f;
+    [SerializeField] protected float attackRange = 5.0f;
     [SerializeField] protected int damage = 0;
 
     protected Rigidbody2D rb;
     protected PlayerMovement player;
+    protected EnemyMovement enemyMovement;
 
     protected bool seePlayer = false;
     protected float fireTimer;
@@ -22,6 +22,7 @@ public class EnemyBase : MonoBehaviour
     {
         player = FindObjectOfType<PlayerMovement>();
         rb = GetComponent<Rigidbody2D>();
+        enemyMovement = transform.parent.GetComponent<EnemyMovement>();
         fireTimer = fireInterval;
     }
 
@@ -34,7 +35,7 @@ public class EnemyBase : MonoBehaviour
 
         //CheckPlayerProximity();
         FacePlayerIfSeen();
-        FollowPLayerIfSeen();
+        //FollowPLayerIfSeen();
         //FirePlayerIfSeen();
     }
 
@@ -44,7 +45,7 @@ public class EnemyBase : MonoBehaviour
         {
             // same layer, then check distance
             float distance = Vector2.Distance(player.gameObject.transform.position, transform.position);
-            if (distance < playerProximityLimit)
+            if (distance < seePlayerRange)
             {
                 // player in range
                 seePlayer = true;
@@ -86,11 +87,11 @@ public class EnemyBase : MonoBehaviour
 
     protected virtual void FollowPLayerIfSeen()
     {
-        if (seePlayer && Vector2.Distance(player.transform.position, transform.position) > attackRange)
+/*        if (seePlayer && Vector2.Distance(player.transform.position, transform.position) > attackRange)
         {
             var player = FindObjectOfType<PlayerMovement>();
-            transform.parent.GetComponent<EnemyMovement>().MoveTo(player.transform, speedMultiplier);
-        }
+            enemyMovement.MoveTo(player.transform, false);
+        }*/
     }
 
     protected virtual void FirePlayerIfSeen()
@@ -100,13 +101,23 @@ public class EnemyBase : MonoBehaviour
 
     public virtual void ExecuteFireState()
     {
-
+        enemyMovement.StopMovement();
     }
 
-/*    public bool GetIsAttacking()
+    public virtual void ExecuteChaseState()
     {
-        return attacking;
-    }*/
+        enemyMovement.MoveTo(player.transform, true);
+    }
+
+    public float GetSeePlayerRange()
+    {
+        return seePlayerRange;
+    }
+
+    public float GetAttackRange()
+    {
+        return attackRange;
+    }
 
     public virtual string toString()
     {

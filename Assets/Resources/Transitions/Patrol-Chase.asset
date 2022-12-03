@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c573b1b5352bf29458ce0222e91b0309, type: 3}
-  m_Name: Fire-Patrol
+  m_Name: Patrol-Chase
   m_EditorClassIdentifier: 
   conditions:
   - ands:
     - cond: 0
-      negated: 1
-  targetState: {fileID: 11400000, guid: 1a20771f28414444fba808e8f88445d6, type: 2}
+      negated: 0
+  targetState: {fileID: 11400000, guid: 2e29237d9d4c29c49bc69bd5fab38426, type: 2}

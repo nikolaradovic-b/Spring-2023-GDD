@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a3dbef69a6451846b56c02e403e1aee, type: 3}
-  m_Name: Fire
+  m_Script: {fileID: 11500000, guid: c573b1b5352bf29458ce0222e91b0309, type: 3}
+  m_Name: Chase-Patrol
   m_EditorClassIdentifier: 
-  state: 2
-  transitions:
-  - {fileID: 11400000, guid: 7a0fa0743ef99ae47ac34f47bf9edc48, type: 2}
+  conditions:
+  - ands:
+    - cond: 0
+      negated: 1
+  targetState: {fileID: 11400000, guid: 1a20771f28414444fba808e8f88445d6, type: 2}

@@ -612,9 +612,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firingOrigin: {fileID: 9132537248055576715}
   fireInterval: 2
-  playerProximityLimit: 10
+  seePlayerRange: 7
   speedMultiplier: 1
-  attackRange: 7
+  attackRange: 5
   damage: 1
   bulletPrefab: {fileID: 6954552094790282884, guid: e652e09a23d108841b5114cafca3fb13,
     type: 3}

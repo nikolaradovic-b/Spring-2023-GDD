@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a3dbef69a6451846b56c02e403e1aee, type: 3}
-  m_Name: Fire
+  m_Script: {fileID: 11500000, guid: c573b1b5352bf29458ce0222e91b0309, type: 3}
+  m_Name: Fire-Chase
   m_EditorClassIdentifier: 
-  state: 2
-  transitions:
-  - {fileID: 11400000, guid: 7a0fa0743ef99ae47ac34f47bf9edc48, type: 2}
+  conditions:
+  - ands:
+    - cond: 1
+      negated: 1
+  targetState: {fileID: 11400000, guid: 2e29237d9d4c29c49bc69bd5fab38426, type: 2}

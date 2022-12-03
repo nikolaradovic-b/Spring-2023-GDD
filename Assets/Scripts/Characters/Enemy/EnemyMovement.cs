@@ -7,12 +7,15 @@ public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] private GameObject[] waypoints;
     [SerializeField] private float patrolSpeed = 1.5f;
+    [SerializeField] private float chaseMultiplier = 2f;
     [SerializeField] private float arrivalOffsetAllowed = 0.25f;
     [SerializeField] private float pauseTime = 2f;
 
     private GameObject nextWaypoint;
     private Rigidbody2D rb;
     private EnemyBase enemy;
+    private AIDestinationSetter destinationSetter;
+    private AIPath path;
 
     private int currentWaypointIndex;
     private bool startingMoving = true;
@@ -30,6 +33,8 @@ public class EnemyMovement : MonoBehaviour
         nextWaypoint = initialWaypoint;
         rb = GetComponentInChildren<Rigidbody2D>();
         enemy = GetComponentInChildren<EnemyBase>();
+        destinationSetter = GetComponent<AIDestinationSetter>();
+        path = GetComponent<AIPath>();
     }
 
     public void ExecutePatrolState()
@@ -52,7 +57,7 @@ public class EnemyMovement : MonoBehaviour
         else if (startingMoving)
         {
             // move to next waypoint
-            MoveTo(nextWaypoint.transform, 1f);
+            MoveTo(nextWaypoint.transform, false);
         }
 
         faceDir = (nextWaypoint.transform.position - transform.position).normalized;
@@ -131,15 +136,28 @@ public class EnemyMovement : MonoBehaviour
         }*/
     }
 
-    public void MoveTo(Transform position, float multiplier)
+    public void MoveTo(Transform position, bool chase)
     {
-        GetComponent<AIDestinationSetter>().target = position;
-        GetComponent<AIPath>().maxSpeed = patrolSpeed * multiplier;
+        destinationSetter.target = position;
+        if (chase)
+        {
+            path.maxSpeed = patrolSpeed * chaseMultiplier;
+        }
+        else
+        {
+            path.maxSpeed = patrolSpeed;
+        }
+    }
+
+    public void StopMovement()
+    {
+        destinationSetter.target = null;
+        path.maxSpeed = 0f;
     }
 
     private IEnumerator PauseThenStart()
     {
         yield return new WaitForSeconds(pauseTime);
-        startingMoving = true;
+        startingMoving = true;  // BUG: this is not called 
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public enum EnemyState
 {
     Patrol,
+    Chase,
     Fire,
 }
 
@@ -22,7 +23,10 @@ public class State : ScriptableObject
                 entity.GetComponent<EnemyMovement>().ExecutePatrolState();
                 break;
             case EnemyState.Fire:
-                entity.GetComponentInChildren<EnemyBase>().Fire();
+                entity.GetComponentInChildren<EnemyBase>().ExecuteFireState();
+                break;
+            case EnemyState.Chase:
+                entity.GetComponentInChildren<EnemyBase>().ExecuteChaseState();
                 break;
             default:
                 break;

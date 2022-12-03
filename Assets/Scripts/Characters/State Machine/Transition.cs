@@ -5,6 +5,7 @@ using UnityEngine;
 public enum TransitionCondition
 {
     SeePlayer,
+    PlayerInAttackRange,
 }
 
 [System.Serializable]
@@ -66,13 +67,26 @@ public class Transition : ScriptableObject
         {
             // Reference world states to handle each condition type!
             case TransitionCondition.SeePlayer:
+                bool canSee = PollingMachine.Instance.CanSeePlayer(objChecked,
+                        objChecked.GetComponentInChildren<EnemyBase>().GetSeePlayerRange());
                 if (andCond.negated)
                 {
-                    return !PollingMachine.Instance.CanSeePlayer(objChecked);
+                    return !canSee;
                 }
                 else
                 {
-                    return PollingMachine.Instance.CanSeePlayer(objChecked);
+                    return canSee;
+                }
+            case TransitionCondition.PlayerInAttackRange:
+                bool canAttack = PollingMachine.Instance.PlayerInAttackRange(objChecked,
+                    objChecked.GetComponentInChildren<EnemyBase>().GetAttackRange());
+                if (andCond.negated)
+                {
+                    return !canAttack;
+                }
+                else
+                {
+                    return canAttack;
                 }
             default:
                 return false;

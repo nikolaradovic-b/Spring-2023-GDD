@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a3dbef69a6451846b56c02e403e1aee, type: 3}
-  m_Name: Fire
+  m_Name: Chase
   m_EditorClassIdentifier: 
-  state: 2
+  state: 1
   transitions:
-  - {fileID: 11400000, guid: 7a0fa0743ef99ae47ac34f47bf9edc48, type: 2}
+  - {fileID: 11400000, guid: da3dc825dce5dc84587063b609ef874a, type: 2}
+  - {fileID: 11400000, guid: 7774f253c2862274e9329b9840663ccc, type: 2}

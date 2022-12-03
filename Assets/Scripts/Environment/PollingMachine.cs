@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PollingMachine : MonoBehaviour
 {
-    [SerializeField] private float playerProximityLimit = 3f;
-
     public static PollingMachine Instance;
 
     private PlayerMovement player;
@@ -19,18 +17,32 @@ public class PollingMachine : MonoBehaviour
         player = FindObjectOfType<PlayerMovement>();
     }
 
-    public bool CanSeePlayer(GameObject obj)
+    public bool CanSeePlayer(GameObject obj, float range)
     {
+        if (player == null)
+        {
+            return false;
+        }
         if (player.gameObject.layer == obj.layer)
         {
             // same layer, then check distance
             float distance = Vector2.Distance(player.transform.position, obj.transform.position);
-            if (distance < playerProximityLimit)
+            if (distance < range)
             {
                 // player in range
                 return true;
             }
         }
         return false;
+    }
+
+    public bool PlayerInAttackRange(GameObject obj, float range)
+    {
+        if (player == null)
+        {
+            return false;
+        }
+        return player.gameObject.layer == obj.layer &&
+            Vector2.Distance(player.transform.position, obj.transform.position) <= range;
     }
 }

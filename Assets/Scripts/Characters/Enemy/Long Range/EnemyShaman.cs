@@ -10,9 +10,6 @@ public class EnemyShaman : EnemyShooterBase{
 
     protected override void Start()
     {
-        //speedMultiplier = 1.50f;
-        attackRange = 2.5f;
-        fireInterval = 1.0f;
         determineClosest();
         base.Start();
     }
@@ -23,19 +20,46 @@ public class EnemyShaman : EnemyShooterBase{
         base.Update();
     }
 
-    protected override void FollowPLayerIfSeen()
+    /*protected override void FollowPLayerIfSeen()
     
     {   
-        /*--Calculates Offset--
+        *//*--Calculates Offset--
         Vector3 distanceVector = transform.position - closest.transform.position ;
         Vector3 distanceVectorNormalized = distanceVector.normalized;
         Vector3 targetPosition = (distanceVectorNormalized * offset);
         Transform closestWithOffset = new GameObject().transform;
         closestWithOffset.transform.position = targetPosition;
         ----------------------*/
-        
-        /* Follows closest enemy */
-        transform.parent.GetComponent<AIDestinationSetter>().target = closest.transform;
+
+    /* Follows closest enemy *//*
+    transform.parent.GetComponent<AIDestinationSetter>().target = closest.transform;
+}*/
+
+    public override void ExecuteChaseState()
+    {
+        if (closest != null)
+        {
+            enemyMovement.MoveTo(closest.transform, true);
+        }
+    }
+
+    public override void ExecuteFireState()
+    {
+        base.ExecuteFireState();
+        if (fireTimer <= Mathf.Epsilon)
+        {
+            var fireDir = (closest.transform.position - transform.position).normalized;
+            GameObject bulletInstance = Instantiate(bulletPrefab, firingOrigin.position, firingOrigin.rotation);
+            float angle = Mathf.Atan2(fireDir.y, fireDir.x) * Mathf.Rad2Deg - 90f;
+            Rigidbody2D rb = bulletInstance.GetComponent<Rigidbody2D>();
+            rb.AddForce(fireDir * bulletForce, ForceMode2D.Impulse);
+            rb.rotation = angle;
+            fireTimer = fireInterval;
+        }
+        else
+        {
+            fireTimer -= Time.deltaTime;
+        }
     }
 
     private void determineClosest(){
@@ -56,7 +80,7 @@ public class EnemyShaman : EnemyShooterBase{
         }
     }
 
-    protected override void FirePlayerIfSeen()
+    /*protected override void FirePlayerIfSeen()
     {
         if (fireTimer <= Mathf.Epsilon)
         {
@@ -74,7 +98,7 @@ public class EnemyShaman : EnemyShooterBase{
         {
             fireTimer -= Time.deltaTime;
         }
-    }
+    }*/
 
 
 

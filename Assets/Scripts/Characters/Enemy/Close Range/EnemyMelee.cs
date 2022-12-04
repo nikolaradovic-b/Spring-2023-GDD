@@ -7,15 +7,11 @@ public class EnemyMelee : EnemyBase
     [SerializeField] private int attackDamage = 3;
 
     protected Animator m_animator;
-    /*private float attackRadius;
-    private Vector3 prevPosition;*/
-
 
     protected override void Start()
     {
         m_animator = GetComponent<Animator>();
         base.Start();
-        //prevPosition = transform.position;
     }
 
     protected override void Update()
@@ -32,14 +28,13 @@ public class EnemyMelee : EnemyBase
     public override void ExecuteFireState()
     {
         base.ExecuteFireState();
-        float distance = Vector3.Distance(transform.position, player.transform.position);
 
-        if (attacking && fireTimer <= Mathf.Epsilon && distance <= attackRange)
+        if (fireTimer <= Mathf.Epsilon)
         {
             m_animator.SetTrigger("Attack");
             fireTimer = fireInterval;
         }
-        else if (attacking && fireTimer > Mathf.Epsilon && distance <= attackRange)
+        else if (fireTimer > Mathf.Epsilon)
         {
             fireTimer = Mathf.Max(0f, fireTimer - Time.deltaTime);
             m_animator.SetInteger("AnimState", 1);

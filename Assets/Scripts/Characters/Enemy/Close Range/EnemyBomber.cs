@@ -8,8 +8,6 @@ public class EnemyBomber : EnemyBase
     [SerializeField] private GameObject hitVFX = null;
     [SerializeField] private int explosionDamage = 5;
 
-    //private bool lockOn = false;
-
     protected override void Start()
     {
         base.Start();
@@ -19,33 +17,6 @@ public class EnemyBomber : EnemyBase
     {
         base.Update();
     }
-
-/*    protected override void CheckPlayerProximity()
-    {
-        // check if bomber has locked onto player
-        if (lockOn)
-        {
-            seePlayer = true;
-            attacking = true;
-        }
-        else
-        {
-            base.CheckPlayerProximity();
-        }
-    }*/
-
-/*    protected override void FollowPLayerIfSeen()
-    {
-        if (seePlayer)
-        {
-            lockOn = true;
-        }
-        if (lockOn)
-        {
-            // Chase player
-            transform.parent.GetComponent<AIDestinationSetter>().target = player.transform;
-        }
-    }*/
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

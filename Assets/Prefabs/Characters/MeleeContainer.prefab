@@ -168,10 +168,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firingOrigin: {fileID: 7567603306201325856}
   fireInterval: 2
-  playerProximityLimit: 3
-  speedMultiplier: 1
+  seePlayerRange: 5
   attackRange: 1.5
-  damage: 2
+  attackDamage: 3
 --- !u!114 &7567603305613687588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -301,6 +300,7 @@ GameObject:
   - component: {fileID: 558094945539207767}
   - component: {fileID: 743127651540778522}
   - component: {fileID: 8769924456852853208}
+  - component: {fileID: 1787798369281971185}
   m_Layer: 0
   m_Name: MeleeContainer
   m_TagString: Untagged
@@ -340,6 +340,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   patrolSpeed: 1.5
+  chaseMultiplier: 2
   arrivalOffsetAllowed: 0.25
   pauseTime: 2
 --- !u!114 &558094945539207767
@@ -426,6 +427,19 @@ MonoBehaviour:
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0
   constrainInsideGraph: 0
+--- !u!114 &1787798369281971185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7567603306189035054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53cee9cf049a4164dbfe51dae758cfff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialState: {fileID: 11400000, guid: e519009ff7bbf3549b8a419b8547138a, type: 2}
 --- !u!1 &7567603306201325859
 GameObject:
   m_ObjectHideFlags: 0

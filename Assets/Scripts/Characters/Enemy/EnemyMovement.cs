@@ -11,7 +11,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float arrivalOffsetAllowed = 0.25f;
     [SerializeField] private float pauseTime = 2f;
 
-    private GameObject nextWaypoint;
+    protected GameObject nextWaypoint;
     private Rigidbody2D rb;
     private EnemyBase enemy;
     private AIDestinationSetter destinationSetter;
@@ -19,18 +19,21 @@ public class EnemyMovement : MonoBehaviour
 
     private int currentWaypointIndex;
     private bool startingMoving = true;
-    private Vector3 faceDir;
 
     private void Start()
     {
         FindObjectOfType<GameManager>().RegisterEnemy();
 
         // Initialize enemy location and variables
-        int randomIndex = Random.Range(0, waypoints.Length);
-        currentWaypointIndex = randomIndex;
-        GameObject initialWaypoint = waypoints[randomIndex];
-        transform.position = initialWaypoint.transform.position;
-        nextWaypoint = initialWaypoint;
+        if (waypoints.Length > 0)
+        {
+            int randomIndex = Random.Range(0, waypoints.Length);
+            currentWaypointIndex = randomIndex;
+            GameObject initialWaypoint = waypoints[randomIndex];
+            transform.position = initialWaypoint.transform.position;
+            nextWaypoint = initialWaypoint;
+        }
+        
         rb = GetComponentInChildren<Rigidbody2D>();
         enemy = GetComponentInChildren<EnemyBase>();
         destinationSetter = GetComponent<AIDestinationSetter>();
@@ -59,13 +62,13 @@ public class EnemyMovement : MonoBehaviour
             // move to next waypoint
             MoveTo(nextWaypoint.transform, false);
         }
-
-        faceDir = (nextWaypoint.transform.position - transform.position).normalized;
-        AdjustFaceDirectionIfMelee();
+        
+        AdjustFaceDirectionIfMelee(nextWaypoint.transform.position);
     }
 
-    private void AdjustFaceDirectionIfMelee()
+    public void AdjustFaceDirectionIfMelee(Vector3 facePos)
     {
+        var faceDir = (facePos - transform.position).normalized;
         if (enemy.toString() == "EnemyMeleeBase")
         {
             if (faceDir.x < 0)
@@ -88,6 +91,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void Update()
     {
+        
         /*if (enemy.GetIsAttacking()) { return; }
         float distToNextWaypoint =
             Vector2.Distance(transform.position, nextWaypoint.transform.position);
@@ -147,6 +151,16 @@ public class EnemyMovement : MonoBehaviour
         {
             path.maxSpeed = patrolSpeed;
         }
+        SetAnimationIfMelee();
+    }
+
+    private void SetAnimationIfMelee()
+    {
+        var animator = GetComponentInChildren<Animator>();
+        if (animator != null)
+        {
+            animator.SetInteger("AnimState", 2);
+        }
     }
 
     public void StopMovement()
@@ -158,6 +172,6 @@ public class EnemyMovement : MonoBehaviour
     private IEnumerator PauseThenStart()
     {
         yield return new WaitForSeconds(pauseTime);
-        startingMoving = true;  // BUG: this is not called 
+        startingMoving = true;
     }
 }

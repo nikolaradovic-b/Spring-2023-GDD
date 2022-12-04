@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c573b1b5352bf29458ce0222e91b0309, type: 3}
-  m_Name: Patrol-Chase
+  m_Name: Chase-Patrol
   m_EditorClassIdentifier: 
   conditions:
   - ands:
     - cond: 0
-      negated: 0
-  targetState: {fileID: 11400000, guid: cf4c3180ea724d4499488511a900bada, type: 2}
+      negated: 1
+  targetState: {fileID: 11400000, guid: e519009ff7bbf3549b8a419b8547138a, type: 2}

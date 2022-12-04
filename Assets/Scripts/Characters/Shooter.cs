@@ -6,8 +6,11 @@ public class Shooter : MonoBehaviour
 {
     [SerializeField] private Transform firingOrigin = null;
     [SerializeField] private GameObject bulletPrefab = null;
+    [SerializeField] private GameObject rocketAmmoPrefab = null;
     [SerializeField] private GameObject pistolPrefab = null;
     [SerializeField] private GameObject minigunPrefab = null;
+    [SerializeField] private GameObject shotgunPrefab = null;
+    [SerializeField] private GameObject rocketPrefab = null;
     private Gun currentGun;
 
     private void Start() {
@@ -33,6 +36,18 @@ public class Shooter : MonoBehaviour
         currentGun.drop();
         currentGun = new Pistol(firingOrigin, bulletPrefab, pistolPrefab);
         FindObjectOfType<CurrentGunUI>().switchPistol();
+    }
+
+    public void switchShotgun() {
+        currentGun.drop();
+        currentGun = new Shotgun(firingOrigin, bulletPrefab, shotgunPrefab, FindObjectOfType<GameManager>().shotgunAmmo);
+        FindObjectOfType<CurrentGunUI>().switchShotgun();
+    }
+
+    public void switchRocket() {
+        currentGun.drop();
+        currentGun = new Rocket(firingOrigin, rocketAmmoPrefab, rocketPrefab, FindObjectOfType<GameManager>().rocketAmmo);
+        FindObjectOfType<CurrentGunUI>().switchRocket();
     }
 
     public int ammoCount() {

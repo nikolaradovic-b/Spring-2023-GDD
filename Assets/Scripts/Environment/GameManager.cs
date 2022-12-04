@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     public bool hasKey = false;
     private bool shopOn = false;
     public int minigunAmmo = 50;
+    public int shotgunAmmo = 15;
+    public int rocketAmmo = 5;
 
     private void Update()
     {

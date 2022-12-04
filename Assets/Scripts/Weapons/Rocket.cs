@@ -2,27 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pistol : Gun
+public class Rocket : Gun
 {
     public Transform firingOrigin = null;
     public GameObject bulletPrefab = null;
-    public GameObject pistolPrefab = null;
-    public float bulletForce = 20f;
-    public new int ammo = 20;
-    public new int maxAmmo = 20;
-    private int rechargeRate = 1;
-    private int rechargeDelay = 2;
-    private float chargeDelay = 0.5f;
-    public new int reloadAmount = 10;
+    public GameObject rocketPrefab = null;
+    public float bulletForce = 10f;
+    public new int ammo = 5;
+    public new int maxAmmo = 5;
+    private float fireDelay = 1.0f;
+    public new int reloadAmount = 5;
 
-    private float rechargeStart = 0f;
+    private float fireDelayStart = 0f;
 
-    public Pistol(Transform fo, GameObject bp, GameObject pp) {
+    public Rocket(Transform fo, GameObject bp, GameObject rp, int startammo) {
         firingOrigin = fo;
         bulletPrefab = bp;
-        pistolPrefab = pp;
+        rocketPrefab = rp;
+        ammo = startammo;
     }
 
+    // Update is called once per frame
     public override void Update()
     {
         if (Input.GetButtonDown("Fire1"))
@@ -36,27 +36,16 @@ public class Pistol : Gun
                 Debug.Log("Out of Ammo");
             }
         }
-        Recharge();
     }
 
     public void Shoot()
     {
-        GameObject bulletInstance = Instantiate(bulletPrefab, firingOrigin.position, firingOrigin.rotation);
+        if (Time.time < fireDelayStart) {return;}
+        GameObject bulletInstance = Instantiate(bulletPrefab, firingOrigin.position, firingOrigin.rotation * Quaternion.AngleAxis(90, Vector3.forward));
         Rigidbody2D rb = bulletInstance.GetComponent<Rigidbody2D>();
         rb.AddForce(-1 * firingOrigin.up * bulletForce, ForceMode2D.Impulse);
         ammo -= 1;
-        rechargeStart = Time.time + rechargeDelay;
-
-    }
-
-    private void Recharge()
-    {
-        if (Time.time > rechargeStart && ammo < maxAmmo)
-        {
-            ammo = Mathf.Min(maxAmmo, ammo + rechargeRate);
-            rechargeStart = Time.time + chargeDelay;
-            Debug.Log("+1 Ammo");
-        }
+        fireDelayStart = Time.time + fireDelay;
     }
 
     public override void Reload() {
@@ -72,6 +61,8 @@ public class Pistol : Gun
     }
 
     public override void drop() {
-        Instantiate(pistolPrefab, firingOrigin.position, firingOrigin.rotation);
+        Debug.Log("in rocket drop");
+        Instantiate(rocketPrefab, firingOrigin.position, firingOrigin.rotation);
+        FindObjectOfType<GameManager>().rocketAmmo = ammo;
     }
 }

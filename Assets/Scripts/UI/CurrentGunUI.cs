@@ -24,4 +24,12 @@ public class CurrentGunUI : MonoBehaviour
     public void switchMinigun() {
         activeGun = guns[1];
     }
+
+    public void switchShotgun() {
+        activeGun = guns[2];
+    }
+
+    public void switchRocket() {
+        activeGun = guns[3];
+    }
 }

@@ -594,7 +594,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
-  immunityDuration: 5
+  immuneDuration: 2
   immuneAlpha: 0.3
   coinRewardOnDie: 10
 --- !u!114 &6974855871162752129
@@ -613,6 +613,8 @@ MonoBehaviour:
   fireInterval: 0
   seePlayerRange: 5
   attackRange: 0
+  healDelay: 5
+  healRate: 1
   hitVFX: {fileID: 8699622481109766837, guid: 7439d0ef06103c94586d875be5b5dc5e, type: 3}
   explosionDamage: 5
 --- !u!114 &918637690135768591

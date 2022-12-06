@@ -170,6 +170,8 @@ MonoBehaviour:
   fireInterval: 2
   seePlayerRange: 5
   attackRange: 1.5
+  healDelay: 5
+  healRate: 1
   attackDamage: 3
 --- !u!114 &7567603305613687588
 MonoBehaviour:
@@ -184,7 +186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
-  immunityDuration: 5
+  immuneDuration: 2
   immuneAlpha: 0.3
   coinRewardOnDie: 10
 --- !u!1 &7567603306032368995

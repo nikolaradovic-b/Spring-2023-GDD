@@ -135,4 +135,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedToDealDamage: 5
-  damageDealt: 20
+  damageDealt: 5

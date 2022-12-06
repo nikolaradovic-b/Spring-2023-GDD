@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -5636866725732256386}
   - component: {fileID: 2391034827269209437}
   - component: {fileID: -6821280804822152745}
-  - component: {fileID: -4384657628810958786}
+  - component: {fileID: -8948592541903488703}
   m_Layer: 20
   m_Name: Rocket Ammo
   m_TagString: Bullet
@@ -132,7 +132,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
---- !u!114 &-4384657628810958786
+--- !u!114 &-8948592541903488703
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6794368948122967039}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fb9c463ee7f39c40a34cdde0b8b0fa5, type: 3}
+  m_Script: {fileID: 11500000, guid: 463035f1b2c0ee144bae48df4b6695b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   hitVFX: {fileID: 8699622481109766837, guid: 09764c1fc7faa40b69c1e28b610fdbf4, type: 3}

@@ -53,8 +53,11 @@ public class EnemyBase : MonoBehaviour
 
     protected virtual void PreFire()
     {
-        enemyMovement.AdjustFaceDirectionIfMelee(player.transform.position);
-        enemyMovement.StopMovement();
+        if (player != null)
+        {
+            enemyMovement.AdjustFaceDirectionIfMelee(player.transform.position);
+            enemyMovement.StopMovement();
+        }
     }
 
     public virtual void ExecuteChaseState()

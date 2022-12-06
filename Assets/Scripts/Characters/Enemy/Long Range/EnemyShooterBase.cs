@@ -27,7 +27,7 @@ public abstract class EnemyShooterBase : EnemyBase
     protected override void Update()
     {
         base.Update();
-        if (toStrafe)
+        if (toStrafe && strafeWaypoint != null)
         {
             Strafe();
         }

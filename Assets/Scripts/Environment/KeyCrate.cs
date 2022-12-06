@@ -26,6 +26,10 @@ public class KeyCrate : MonoBehaviour
         vfx.layer = gameObject.layer;
         vfx.GetComponent<SpriteRenderer>().sortingLayerName = GetComponent<SpriteRenderer>().sortingLayerName;
 
+        if (key == null)
+        {
+            return;
+        }
         GameObject keyInstance = Instantiate(key, origin.position, origin.rotation);
         keyInstance.layer = gameObject.layer;
         keyInstance.GetComponent<SpriteRenderer>().sortingLayerName = LayerMask.LayerToName(keyInstance.layer);

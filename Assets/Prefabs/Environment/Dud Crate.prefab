@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -3815992471926790424}
   - component: {fileID: -1639600474294093585}
   m_Layer: 0
-  m_Name: Rocket Crate
+  m_Name: Dud Crate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitVFX: {fileID: 8699622481109766837, guid: 7439d0ef06103c94586d875be5b5dc5e, type: 3}
-  key: {fileID: 1839403131963772748, guid: 1406361cc0890492cb5d26c90d21364b, type: 3}
+  key: {fileID: 0}
   origin: {fileID: 2055102311959635375}
 --- !u!1 &2055102312182832482
 GameObject:

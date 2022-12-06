@@ -167,9 +167,15 @@ MonoBehaviour:
   firingOrigin: {fileID: 3070283929601844694}
   bulletPrefab: {fileID: 6954552094790282884, guid: 48a101623590c1748b7a5f87d60325ed,
     type: 3}
+  rocketAmmoPrefab: {fileID: 6794368948122967039, guid: a1bdfd46a50a843c7877ca5506e68e64,
+    type: 3}
   pistolPrefab: {fileID: 6284775158396743074, guid: c017f9797af3b47a5b6cf35611af3644,
     type: 3}
   minigunPrefab: {fileID: 8479612845936640240, guid: f040fcd53ed3f43ecb7d32b37f550059,
+    type: 3}
+  shotgunPrefab: {fileID: 7303630712096677125, guid: 04fc59b7232094e8d98caee55ffda157,
+    type: 3}
+  rocketPrefab: {fileID: 1839403131963772748, guid: 1406361cc0890492cb5d26c90d21364b,
     type: 3}
 --- !u!114 &7649259413947932004
 MonoBehaviour:

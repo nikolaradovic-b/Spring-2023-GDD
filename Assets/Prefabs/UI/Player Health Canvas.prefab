@@ -1064,6 +1064,8 @@ MonoBehaviour:
   guns:
   - {fileID: 21300000, guid: 101eb9899126e40d8b565e27bc1e00fc, type: 3}
   - {fileID: 21300000, guid: d652884e2eb5441ada8cc04bc62462a1, type: 3}
+  - {fileID: 21300000, guid: 75e84a6d3666b405aabaaa7b56c81773, type: 3}
+  - {fileID: 21300000, guid: de2b17f07990a4183836f7146ccefe80, type: 3}
   display: {fileID: 2047686359748082356}
 --- !u!1 &8989810667720639230
 GameObject:

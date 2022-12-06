@@ -8,6 +8,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private GameObject[] waypoints;
     [SerializeField] private float patrolSpeed = 1.5f;
     [SerializeField] private float chaseMultiplier = 2f;
+    [SerializeField] private float strafeMultiplier = 6f;
     [SerializeField] private float arrivalOffsetAllowed = 0.25f;
     [SerializeField] private float pauseTime = 2f;
 
@@ -94,12 +95,16 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    public void MoveTo(Transform position, bool chase)
+    public void MoveTo(Transform position, bool chase, bool strafe=false)
     {
         destinationSetter.target = position;
         if (chase)
         {
             path.maxSpeed = patrolSpeed * chaseMultiplier;
+        }
+        else if (strafe)
+        {
+            path.maxSpeed = patrolSpeed * strafeMultiplier;
         }
         else
         {

@@ -39,10 +39,16 @@ public class State : ScriptableObject
 
     public virtual void ExecuteEntryActions(GameObject entity)
     {
+        EnemyShooterBase shooter = entity.GetComponentInChildren<EnemyShooterBase>();
+        EnemyBase enemy = entity.GetComponentInChildren<EnemyBase>();
         switch (state) 
         {
             case EnemyState.Fire:
-                entity.GetComponentInChildren<EnemyBase>().SetAttacking(true);
+                enemy.SetAttacking(true);
+                if (shooter != null)
+                {
+                    shooter.SetStrafe(true);
+                }
                 break;
             default:
                 break;
@@ -51,10 +57,16 @@ public class State : ScriptableObject
 
     public virtual void ExecuteExitActions(GameObject entity)
     {
+        EnemyShooterBase shooter = entity.GetComponentInChildren<EnemyShooterBase>();
+        EnemyBase enemy = entity.GetComponentInChildren<EnemyBase>();
         switch (state)
         {
             case EnemyState.Fire:
-                entity.GetComponentInChildren<EnemyBase>().SetAttacking(false);
+                enemy.SetAttacking(false);
+                if (shooter != null)
+                {
+                    shooter.SetStrafe(false);
+                }
                 break;
             default:
                 break;

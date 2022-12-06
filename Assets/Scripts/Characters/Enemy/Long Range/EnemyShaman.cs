@@ -20,21 +20,6 @@ public class EnemyShaman : EnemyShooterBase{
         base.Update();
     }
 
-    /*protected override void FollowPLayerIfSeen()
-    
-    {   
-        *//*--Calculates Offset--
-        Vector3 distanceVector = transform.position - closest.transform.position ;
-        Vector3 distanceVectorNormalized = distanceVector.normalized;
-        Vector3 targetPosition = (distanceVectorNormalized * offset);
-        Transform closestWithOffset = new GameObject().transform;
-        closestWithOffset.transform.position = targetPosition;
-        ----------------------*/
-
-    /* Follows closest enemy *//*
-    transform.parent.GetComponent<AIDestinationSetter>().target = closest.transform;
-}*/
-
     public override void ExecuteChaseState()
     {
         if (closest != null)
@@ -45,13 +30,22 @@ public class EnemyShaman : EnemyShooterBase{
 
     public override void ExecuteFireState()
     {
-        base.ExecuteFireState();
+        PreFire();
         if (fireTimer <= Mathf.Epsilon)
         {
             var fireDir = (closest.transform.position - transform.position).normalized;
             GameObject bulletInstance = Instantiate(bulletPrefab, firingOrigin.position, firingOrigin.rotation);
             float angle = Mathf.Atan2(fireDir.y, fireDir.x) * Mathf.Rad2Deg - 90f;
             Rigidbody2D rb = bulletInstance.GetComponent<Rigidbody2D>();
+
+            bulletInstance.layer = closest.gameObject.layer;
+            string name = closest.GetComponent<SpriteRenderer>().sortingLayerName;
+            bulletInstance.GetComponent<SpriteRenderer>().sortingLayerName = name;
+            SpriteRenderer[] srs = bulletInstance.GetComponentsInChildren<SpriteRenderer>();
+            foreach (SpriteRenderer sr in srs)
+            {
+                sr.sortingLayerName = name;
+            }
             rb.AddForce(fireDir * bulletForce, ForceMode2D.Impulse);
             rb.rotation = angle;
             fireTimer = fireInterval;
@@ -62,7 +56,8 @@ public class EnemyShaman : EnemyShooterBase{
         }
     }
 
-    private void determineClosest(){
+    private void determineClosest()
+    {
         enemies.Clear();
         foreach(EnemyBase enemy in FindObjectsOfType<EnemyBase>()){
             if (enemy.toString() != "EnemyShaman"){
@@ -80,27 +75,10 @@ public class EnemyShaman : EnemyShooterBase{
         }
     }
 
-    /*protected override void FirePlayerIfSeen()
+    public GameObject GetClosestEnemy()
     {
-        if (fireTimer <= Mathf.Epsilon)
-        {
-            // Debug.Log("Fire!");
-            var fireDir = (closest.transform.position - transform.position).normalized;
-            GameObject bulletInstance = Instantiate(bulletPrefab, firingOrigin.position, firingOrigin.rotation);
-            float angle = Mathf.Atan2(fireDir.y, fireDir.x) * Mathf.Rad2Deg - 90f;
-            Rigidbody2D rb = bulletInstance.GetComponent<Rigidbody2D>();
-            rb.AddForce(fireDir * bulletForce, ForceMode2D.Impulse);
-            rb.rotation = angle;
-            //rb.AddForce(-1 * firingOrigin.up * bulletForce, ForceMode2D.Impulse);
-            fireTimer = fireInterval;
-        }
-        else
-        {
-            fireTimer -= Time.deltaTime;
-        }
-    }*/
-
-
+        return closest.gameObject;
+    }
 
     public override string toString(){
         return "EnemyShaman";

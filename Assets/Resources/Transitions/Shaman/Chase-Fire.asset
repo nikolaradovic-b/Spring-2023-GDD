@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   conditions:
   - ands:
-    - cond: 1
+    - cond: 2
       negated: 0
   targetState: {fileID: 11400000, guid: 86e52eb9fe9324442b8178144e9b6da5, type: 2}

@@ -834,7 +834,7 @@ public class AstarPath : VersionedMonoBehaviour {
 			} else if (path.error) {
 				Debug.LogWarning(debug);
 			} else {
-				Debug.Log(debug);
+				//Debug.Log(debug);
 			}
 		}
 	}
@@ -1379,7 +1379,7 @@ public class AstarPath : VersionedMonoBehaviour {
 		if (!Application.isPlaying) return;
 
 		if (logPathResults == PathLog.Heavy)
-			Debug.Log("+++ AstarPath Component Destroyed - Cleaning Up Pathfinding Data +++");
+			//Debug.Log("+++ AstarPath Component Destroyed - Cleaning Up Pathfinding Data +++");
 
 		if (active != this) return;
 
@@ -1397,7 +1397,7 @@ public class AstarPath : VersionedMonoBehaviour {
 		pathProcessor.queue.TerminateReceivers();
 
 		if (logPathResults == PathLog.Heavy)
-			Debug.Log("Processing Possible Work Items");
+			//Debug.Log("Processing Possible Work Items");
 
 		// Stop the graph update thread (if it is running)
 		graphUpdates.DisableMultithreading();
@@ -1406,21 +1406,21 @@ public class AstarPath : VersionedMonoBehaviour {
 		pathProcessor.JoinThreads();
 
 		if (logPathResults == PathLog.Heavy)
-			Debug.Log("Returning Paths");
+			//Debug.Log("Returning Paths");
 
 
 		// Return all paths
 		pathReturnQueue.ReturnPaths(false);
 
 		if (logPathResults == PathLog.Heavy)
-			Debug.Log("Destroying Graphs");
+			//Debug.Log("Destroying Graphs");
 
 
 		// Clean up graph data
 		data.OnDestroy();
 
 		if (logPathResults == PathLog.Heavy)
-			Debug.Log("Cleaning up variables");
+			//Debug.Log("Cleaning up variables");
 
 		// Clear variables up, static variables are good to clean up, otherwise the next scene might get weird data
 
@@ -1610,7 +1610,7 @@ public class AstarPath : VersionedMonoBehaviour {
 	/// Scans a particular graph asynchronously. This is a IEnumerable, you can loop through it to get the progress
 	/// <code>
 	/// foreach (Progress progress in AstarPath.active.ScanAsync()) {
-	///     Debug.Log("Scanning... " + progress.description + " - " + (progress.progress*100).ToString("0") + "%");
+	///     //Debug.Log("Scanning... " + progress.description + " - " + (progress.progress*100).ToString("0") + "%");
 	/// }
 	/// </code>
 	/// You can scan graphs asyncronously by yielding when you loop through the progress.
@@ -1619,7 +1619,7 @@ public class AstarPath : VersionedMonoBehaviour {
 	/// <code>
 	/// IEnumerator Start () {
 	///     foreach (Progress progress in AstarPath.active.ScanAsync()) {
-	///         Debug.Log("Scanning... " + progress.description + " - " + (progress.progress*100).ToString("0") + "%");
+	///         //Debug.Log("Scanning... " + progress.description + " - " + (progress.progress*100).ToString("0") + "%");
 	///         yield return null;
 	///     }
 	/// }
@@ -1637,7 +1637,7 @@ public class AstarPath : VersionedMonoBehaviour {
 	///
 	/// <code>
 	/// foreach (Progress progress in AstarPath.active.ScanAsync()) {
-	///     Debug.Log("Scanning... " + progress.description + " - " + (progress.progress*100).ToString("0") + "%");
+	///     //Debug.Log("Scanning... " + progress.description + " - " + (progress.progress*100).ToString("0") + "%");
 	/// }
 	/// </code>
 	/// You can scan graphs asyncronously by yielding when you loop through the progress.
@@ -1646,7 +1646,7 @@ public class AstarPath : VersionedMonoBehaviour {
 	/// <code>
 	/// IEnumerator Start () {
 	///     foreach (Progress progress in AstarPath.active.ScanAsync()) {
-	///         Debug.Log("Scanning... " + progress.description + " - " + (progress.progress*100).ToString("0") + "%");
+	///         //Debug.Log("Scanning... " + progress.description + " - " + (progress.progress*100).ToString("0") + "%");
 	///         yield return null;
 	///     }
 	/// }
@@ -1781,7 +1781,7 @@ public class AstarPath : VersionedMonoBehaviour {
 		System.GC.Collect();
 
 		if (logPathResults != PathLog.None && logPathResults != PathLog.OnlyErrors) {
-			Debug.Log("Scanning - Process took "+(lastScanTime*1000).ToString("0")+" ms to complete");
+			//Debug.Log("Scanning - Process took "+(lastScanTime*1000).ToString("0")+" ms to complete");
 		}
 	}
 

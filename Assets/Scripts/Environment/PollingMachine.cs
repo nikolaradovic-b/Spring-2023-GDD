@@ -17,13 +17,22 @@ public class PollingMachine : MonoBehaviour
         player = FindObjectOfType<PlayerMovement>();
     }
 
+    public GameObject GetPlayer()
+    {
+        if (player == null)
+        {
+            return null;
+        }
+        return player.gameObject;
+    }
+
     public bool CanSeePlayer(GameObject obj, float range)
     {
         if (player == null)
         {
             return false;
         }
-        if (player.gameObject.layer == obj.layer)
+        if (player.gameObject.layer == obj.layer || player.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             // same layer, then check distance
             float distance = Vector2.Distance(player.transform.position, obj.transform.position);
@@ -36,13 +45,23 @@ public class PollingMachine : MonoBehaviour
         return false;
     }
 
-    public bool PlayerInAttackRange(GameObject obj, float range)
+    public bool TargetInAttackRange(GameObject from, GameObject target, float range)
     {
-        if (player == null)
+        if (target == null)
         {
             return false;
         }
-        return player.gameObject.layer == obj.layer &&
-            Vector2.Distance(player.transform.position, obj.transform.position) <= range;
+        return target.layer == from.layer &&
+            Vector2.Distance(target.transform.position, from.transform.position) <= range;
+    }
+
+    public bool CanBossAttack(Boss boss)
+    {
+        return boss.GetCanFire();
+    }
+
+    public bool GetBossProtect(Boss boss)
+    {
+        return boss.GetPhase() == BossPhase.Protection;
     }
 }

@@ -3,31 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+public enum BulletType
+{
+    Bullet,
+    Spikeball,
+    Rocket
+}
+
 public class Health : MonoBehaviour
 {
-    [SerializeField] private int maxHealth = 10;
-    [SerializeField] private float immunityDuration = 5f;
-    [Range(0f, 1f)][SerializeField] private float immuneAlpha = 0.3f;
-    [SerializeField] private int coinRewardOnDie = 10;
+    [SerializeField] protected int maxHealth = 10;
+    [SerializeField] protected float immuneDuration = 2f;
+    [Range(0f, 1f)][SerializeField] protected float immuneAlpha = 0.3f;
+    [SerializeField] protected int coinRewardOnDie = 10;
 
-    private int currentHealth;
-    private bool immuneState = false;
-    private float immuneTimer;
-    private float immuneDuration = 2.0f;
-    private SpriteRenderer rend;
-    private bool immune = false;
+    protected int currentHealth;
+    protected float immuneTimer;
+    protected SpriteRenderer rend;
 
     public static Action<GameObject> onTakeDamage;
 
-    private void Start()
+    protected virtual void Start()
     {
         currentHealth = maxHealth;
         rend = GetComponent<SpriteRenderer>();
     }
 
-    private void Update(){
-        if (immuneTimer > Mathf.Epsilon){
+    protected virtual void Update()
+    {
+        if (immuneTimer > 0f)
+        {
             immuneTimer = Mathf.Max(0f, immuneTimer - Time.deltaTime);
+        }
+        else
+        {
+            var color = rend.color;
+            color.a = 1f;
+            rend.color = color;
         }
     }
 
@@ -38,39 +50,18 @@ public class Health : MonoBehaviour
 
     public void SetImmune()
     {
-        immune = true;
+        immuneTimer = immuneDuration;
         var color = rend.color;
         color.a = immuneAlpha;
         rend.color = color;
-        // Set immune to false after a duration
-        Invoke(nameof(ResetImmune), immunityDuration);
     }
 
-    private void ResetImmune()
+    public virtual void TakeDamage(int amount, BulletType type = BulletType.Bullet)
     {
-        immune = false;
-        var color = rend.color;
-        color.a = 1f;
-        rend.color = color;
-    }
-
-    public void TakeDamage(int amount)
-    {
-        if(immuneState && immuneTimer > Mathf.Epsilon){
-            return;
-        } else {
-            immuneState = false;
-            immuneTimer = 0f;
-            var color = rend.color;
-            color.a = 1f;
-            rend.color = color;
-        }
-
-        // From powerup
-        if (immune)
+        if (immuneTimer > 0f)
         {
             return;
-        }
+        } 
 
         currentHealth = Mathf.Max(0, currentHealth - amount);
         onTakeDamage?.Invoke(gameObject);
@@ -80,7 +71,6 @@ public class Health : MonoBehaviour
             if (GetComponent<PlayerMovement>())
             {
                 // Player has died!
-                Debug.Log("Lost!");
                 Destroy(gameObject);
                 FindObjectOfType<GameManager>().RestartLevel();
             }
@@ -97,16 +87,6 @@ public class Health : MonoBehaviour
                 Destroy(gameObject.transform.parent.gameObject);
             }
         }
-    }
-
-    // From Shaman
-    public void setImmuneState()
-    {
-        immuneState = true;
-        immuneTimer = immuneDuration;
-        var color = rend.color;
-        color.a = immuneAlpha;
-        rend.color = color;
     }
 
     public int GetCurrentHealth()

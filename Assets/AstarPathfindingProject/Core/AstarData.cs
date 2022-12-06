@@ -214,7 +214,7 @@ namespace Pathfinding {
 		///
 		/// <code>
 		/// AstarPath.active.data.GetNodes(node => {
-		///     Debug.Log("I found a node at position " + (Vector3)node.position);
+		///     //Debug.Log("I found a node at position " + (Vector3)node.position);
 		/// });
 		/// </code>
 		///
@@ -295,7 +295,7 @@ namespace Pathfinding {
 			byte[] bytes = sr.CloseSerialize();
 			checksum = sr.GetChecksum();
 #if ASTARDEBUG
-			Debug.Log("Got a whole bunch of data, "+bytes.Length+" bytes");
+			//Debug.Log("Got a whole bunch of data, "+bytes.Length+" bytes");
 #endif
 			graphLock.Release();
 			return bytes;
@@ -353,7 +353,7 @@ namespace Pathfinding {
 						DeserializeGraphsPartAdditive(sr);
 						sr.CloseDeserialize();
 					} else {
-						Debug.Log("Invalid data file (cannot read zip).\nThe data is either corrupt or it was saved using a 3.0.x or earlier version of the system");
+						//Debug.Log("Invalid data file (cannot read zip).\nThe data is either corrupt or it was saved using a 3.0.x or earlier version of the system");
 					}
 				} else {
 					throw new System.ArgumentNullException("bytes");
@@ -449,7 +449,7 @@ namespace Pathfinding {
 			graphTypes = graphList.ToArray();
 
 #if ASTARDEBUG
-			Debug.Log("Found "+graphTypes.Length+" graph types");
+			//Debug.Log("Found "+graphTypes.Length+" graph types");
 #endif
 #else
 			graphTypes = DefaultGraphTypes;
@@ -481,7 +481,7 @@ namespace Pathfinding {
 		/// </summary>
 		[System.Obsolete("Use CreateGraph(System.Type) instead")]
 		public NavGraph CreateGraph (string type) {
-			Debug.Log("Creating Graph of type '"+type+"'");
+			//Debug.Log("Creating Graph of type '"+type+"'");
 
 			for (int i = 0; i < graphTypes.Length; i++) {
 				if (graphTypes[i].Name == type) {

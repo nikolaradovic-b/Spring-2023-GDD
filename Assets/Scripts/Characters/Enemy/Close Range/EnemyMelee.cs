@@ -49,7 +49,7 @@ public class EnemyMelee : EnemyBase
         {
             if (hit.GetComponent<PlayerMovement>())
             {
-                Debug.Log("Melee Hit!");
+                //Debug.Log("Melee Hit!");
                 player.GetComponent<Health>().TakeDamage(attackDamage);
             }
         }

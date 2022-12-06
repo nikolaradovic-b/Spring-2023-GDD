@@ -347,7 +347,7 @@ MonoBehaviour:
   firingOrigin: {fileID: 6203435451309284688}
   fireInterval: 1
   seePlayerRange: 0
-  attackRange: 2.5
+  attackRange: 2
   bulletPrefab: {fileID: 6954552094790282884, guid: 7e1a0fbbec0a44aff9387480f88ab8c1,
     type: 3}
   bulletForce: 20

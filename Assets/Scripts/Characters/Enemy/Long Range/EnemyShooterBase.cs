@@ -19,7 +19,7 @@ public abstract class EnemyShooterBase : EnemyBase
 
     public override void ExecuteFireState()
     {
-        PreFire();
+        base.ExecuteFireState();
         if (fireTimer <= Mathf.Epsilon)
         {
             var fireDir = (player.transform.position - transform.position).normalized;

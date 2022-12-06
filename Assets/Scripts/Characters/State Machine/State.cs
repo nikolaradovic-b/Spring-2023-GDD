@@ -7,6 +7,7 @@ public enum EnemyState
     Patrol,
     Chase,
     Fire,
+    BossProtect
 }
 
 [CreateAssetMenu(menuName = "StateMachine/State")]
@@ -27,6 +28,9 @@ public class State : ScriptableObject
                 break;
             case EnemyState.Chase:
                 entity.GetComponentInChildren<EnemyBase>().ExecuteChaseState();
+                break;
+            case EnemyState.BossProtect:
+                entity.GetComponent<EnemyMovement>().StopMovement();
                 break;
             default:
                 break;

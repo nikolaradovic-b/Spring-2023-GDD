@@ -82,7 +82,7 @@ namespace Pathfinding {
 			point.tmpBytes = GC.GetTotalMemory(false);
 			point.watch.Start();
 			//point.lastRecorded = DateTime.UtcNow;
-			//Debug.Log ("Starting " + tag);
+			////Debug.Log ("Starting " + tag);
 #endif
 		}
 
@@ -101,7 +101,7 @@ namespace Pathfinding {
 			point.watch.Stop();
 			point.totalBytes += GC.GetTotalMemory(false) - point.tmpBytes;
 			//profiles[tag] = point;
-			//Debug.Log ("Ending " + tag);
+			////Debug.Log ("Ending " + tag);
 #else
 			EndProfile();
 #endif
@@ -169,7 +169,7 @@ namespace Pathfinding {
 			output.Append("\n\n============================\n\t\tTotal runtime: ");
 			output.Append(endTime.TotalSeconds.ToString("F3"));
 			output.Append(" seconds\n============================");
-			Debug.Log(output.ToString());
+			//Debug.Log(output.ToString());
 		}
 
 		[System.Diagnostics.Conditional("ProfileAstar")]
@@ -219,7 +219,7 @@ namespace Pathfinding {
 			output.Append("\n\n============================\n\t\tTotal runtime: ");
 			output.Append(endTime.TotalSeconds.ToString("F3"));
 			output.Append(" seconds\n============================");
-			Debug.Log(output.ToString());
+			//Debug.Log(output.ToString());
 		}
 	}
 }

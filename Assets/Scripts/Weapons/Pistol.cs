@@ -11,7 +11,7 @@ public class Pistol : Gun
     public new int ammo = 20;
     public new int maxAmmo = 20;
     private int rechargeRate = 1;
-    private int rechargeDelay = 5;
+    [SerializeField] private int rechargeDelay = 2;
     private float chargeDelay = 0.5f;
     public new int reloadAmount = 10;
 
@@ -30,10 +30,6 @@ public class Pistol : Gun
             if (ammo > 0)
             {
                 Shoot();
-            }
-            else
-            {
-                Debug.Log("Out of Ammo");
             }
         }
         Recharge();
@@ -55,7 +51,6 @@ public class Pistol : Gun
         {
             ammo = Mathf.Min(maxAmmo, ammo + rechargeRate);
             rechargeStart = Time.time + chargeDelay;
-            Debug.Log("+1 Ammo");
         }
     }
 

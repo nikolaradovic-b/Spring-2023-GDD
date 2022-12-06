@@ -243,7 +243,7 @@ namespace Pathfinding {
 			hasParsedServerMessage = true;
 
 #if ASTARDEBUG
-			Debug.Log("Result from update check:\n"+result);
+			//Debug.Log("Result from update check:\n"+result);
 #endif
 
 			string[] splits = result.Split('|');

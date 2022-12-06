@@ -8,7 +8,6 @@ public class ShamanBullet : Bullet
     // Start is called before the first frame update
     protected override void Start()
     {
-        base.Start();
         damageDealt = 0;
     }
 
@@ -20,10 +19,10 @@ public class ShamanBullet : Bullet
         vfx.GetComponent<SpriteRenderer>().sortingLayerName = GetComponent<SpriteRenderer>().sortingLayerName;
         if (collision.gameObject.GetComponent<Health>())
         {
-            collision.gameObject.GetComponent<Health>().setImmuneState();
+            collision.gameObject.GetComponent<Health>().SetImmune();
         }
             
-        Destroy(vfx, 5f);
+        Destroy(vfx, 1f);
         Destroy(gameObject);
     }
 }

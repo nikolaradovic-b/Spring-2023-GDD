@@ -6,6 +6,9 @@ public enum TransitionCondition
 {
     SeePlayer,
     PlayerInAttackRange,
+    TargetInProtectionRange,
+    BossAttack,
+    BossProtect
 }
 
 [System.Serializable]
@@ -78,7 +81,8 @@ public class Transition : ScriptableObject
                     return canSee;
                 }
             case TransitionCondition.PlayerInAttackRange:
-                bool canAttack = PollingMachine.Instance.PlayerInAttackRange(objChecked,
+                bool canAttack = PollingMachine.Instance.TargetInAttackRange(objChecked,
+                    PollingMachine.Instance.GetPlayer(), 
                     objChecked.GetComponentInChildren<EnemyBase>().GetAttackRange());
                 if (andCond.negated)
                 {
@@ -87,6 +91,38 @@ public class Transition : ScriptableObject
                 else
                 {
                     return canAttack;
+                }
+            case TransitionCondition.TargetInProtectionRange:
+                bool canProtect = PollingMachine.Instance.TargetInAttackRange(objChecked,
+                    objChecked.GetComponentInChildren<EnemyShaman>().GetClosestEnemy(),
+                    objChecked.GetComponentInChildren<EnemyBase>().GetAttackRange());
+                if (andCond.negated)
+                {
+                    return !canProtect;
+                }
+                else
+                {
+                    return canProtect;
+                }
+            case TransitionCondition.BossAttack:
+                bool bossAttack = PollingMachine.Instance.CanBossAttack(objChecked.GetComponentInChildren<Boss>());
+                if (andCond.negated)
+                {
+                    return !bossAttack;
+                }
+                else
+                {
+                    return bossAttack;
+                }
+            case TransitionCondition.BossProtect:
+                bool bossProtect = PollingMachine.Instance.GetBossProtect(objChecked.GetComponentInChildren<Boss>());
+                if (andCond.negated)
+                {
+                    return !bossProtect;
+                }
+                else
+                {
+                    return bossProtect;
                 }
             default:
                 return false;

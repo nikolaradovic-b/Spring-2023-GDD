@@ -318,6 +318,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   patrolSpeed: 1.5
+  chaseMultiplier: 2
   arrivalOffsetAllowed: 0.25
   pauseTime: 2
 --- !u!114 &6511256427733959149
@@ -595,7 +596,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
-  immunityDuration: 5
+  immuneDuration: 2
   immuneAlpha: 0.3
   coinRewardOnDie: 10
 --- !u!114 &7121754630647371081
@@ -613,9 +614,9 @@ MonoBehaviour:
   firingOrigin: {fileID: 9132537248055576715}
   fireInterval: 2
   seePlayerRange: 7
-  speedMultiplier: 1
   attackRange: 5
-  damage: 1
+  healDelay: 5
+  healRate: 1
   bulletPrefab: {fileID: 6954552094790282884, guid: e652e09a23d108841b5114cafca3fb13,
     type: 3}
   bulletForce: 20

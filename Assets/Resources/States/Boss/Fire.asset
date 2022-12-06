@@ -15,3 +15,4 @@ MonoBehaviour:
   state: 2
   transitions:
   - {fileID: 11400000, guid: 908c087547a0e9f41a23c593b9bfd7ae, type: 2}
+  - {fileID: 11400000, guid: 8a756217cb4006a45b595c9cc40253df, type: 2}

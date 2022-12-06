@@ -20517,6 +20517,8 @@ MonoBehaviour:
   fireInterval: 4
   seePlayerRange: 0
   attackRange: 0
+  healDelay: 2
+  healRate: 1
   scatterProjectile: {fileID: 6954552094790282884, guid: 9eade380003b544448eb652b926daab4,
     type: 3}
   fireRateIncrease: 0.6

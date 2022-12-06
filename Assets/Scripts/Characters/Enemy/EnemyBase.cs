@@ -8,6 +8,8 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] protected float fireInterval = 2.0f;
     [SerializeField] protected float seePlayerRange = 7f;
     [SerializeField] protected float attackRange = 5.0f;
+    [SerializeField] protected int healDelay = 2;
+    [SerializeField] protected int healRate = 1;
 
     protected Rigidbody2D rb;
     protected PlayerMovement player;
@@ -16,6 +18,7 @@ public class EnemyBase : MonoBehaviour
     protected bool seePlayer = false;
     protected float fireTimer;
     protected bool attacking = false;
+    protected float healStart;
 
     protected virtual void Start()
     {
@@ -23,11 +26,24 @@ public class EnemyBase : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         enemyMovement = transform.parent.GetComponent<EnemyMovement>();
         fireTimer = fireInterval;
+        healStart = Time.time;
     }
 
     protected virtual void Update()
     {
+        if (!attacking)
+        {
+            if (Time.time > healStart && gameObject.tag != "Boss")
+            {
+                GetComponent<Health>().Heal(healRate);
+                healStart = Time.time + healDelay;
+            }
+        }
+    }
 
+    public void SetAttacking(bool attacking)
+    {
+        this.attacking = attacking;
     }
 
     public virtual void ExecuteFireState()

@@ -39,12 +39,26 @@ public class State : ScriptableObject
 
     public virtual void ExecuteEntryActions(GameObject entity)
     {
-
+        switch (state) 
+        {
+            case EnemyState.Fire:
+                entity.GetComponentInChildren<EnemyBase>().SetAttacking(true);
+                break;
+            default:
+                break;
+        }
     }
 
     public virtual void ExecuteExitActions(GameObject entity)
     {
-
+        switch (state)
+        {
+            case EnemyState.Fire:
+                entity.GetComponentInChildren<EnemyBase>().SetAttacking(false);
+                break;
+            default:
+                break;
+        }
     }
 
     public Transition[] GetTransitions()

@@ -329,7 +329,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
-  immunityDuration: 5
+  immuneDuration: 2
   immuneAlpha: 0.3
   coinRewardOnDie: 10
 --- !u!114 &7223652099051049104
@@ -348,6 +348,8 @@ MonoBehaviour:
   fireInterval: 1
   seePlayerRange: 0
   attackRange: 2
+  healDelay: 2
+  healRate: 0
   bulletPrefab: {fileID: 6954552094790282884, guid: 7e1a0fbbec0a44aff9387480f88ab8c1,
     type: 3}
   bulletForce: 20

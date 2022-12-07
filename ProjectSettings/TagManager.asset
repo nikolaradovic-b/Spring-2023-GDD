@@ -8,6 +8,7 @@ TagManager:
   - Bullet
   - Boss
   - BossBullet
+  - Minion
   layers:
   - Default
   - TransparentFX

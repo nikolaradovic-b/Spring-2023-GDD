@@ -20736,7 +20736,7 @@ MonoBehaviour:
   coinRewardOnDie: 10
   vulnerableHealthThreshold: 60
   spawnMinionThreshold: 40
-  protectionThreshold: 10
+  protectionThreshold: 20
 --- !u!114 &807355635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26854,8 +26854,6 @@ MonoBehaviour:
   - {fileID: 1844062063}
   - {fileID: 1351184591}
   - {fileID: 1275082921}
-  - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 707448061}
   patrolSpeed: 1.5
   chaseMultiplier: 0
@@ -31394,6 +31392,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3070283929515845450, guid: 1b7876b284957984abff2fd7e01b4b09,
+        type: 3}
+      propertyPath: moveSpeed
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3070283929515845451, guid: 1b7876b284957984abff2fd7e01b4b09,
         type: 3}

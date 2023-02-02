@@ -29,12 +29,13 @@ public abstract class EnemyShooterBase : EnemyBase
         base.Update();
         if (toStrafe && strafeWaypoint != null)
         {
-            Strafe();
+            //Strafe();
         }
     }
 
     public override void ExecuteFireState()
     {
+        base.ExecuteFireState();
         if (fireTimer <= Mathf.Epsilon)
         {
             var fireDir = (player.transform.position - transform.position).normalized;
@@ -79,7 +80,7 @@ public abstract class EnemyShooterBase : EnemyBase
             Vector3 newPos = transform.position + offset;
             strafeWaypoint.transform.position = newPos;
         }
-        transform.parent.GetComponent<EnemyMovement>().MoveTo(strafeWaypoint.transform, false, true);
+        //transform.parent.GetComponent<EnemyMovement>().MoveTo(strafeWaypoint.transform, false, true);
     }
 
     /* Choosing to strafe on x or y axis */
@@ -97,7 +98,7 @@ public abstract class EnemyShooterBase : EnemyBase
 
     public void SetStrafe(bool strafe)
     {
-        this.toStrafe = strafe;
+        //this.toStrafe = strafe;
     }
 
     public override string toString(){

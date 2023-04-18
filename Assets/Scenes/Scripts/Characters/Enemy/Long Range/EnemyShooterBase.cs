@@ -6,6 +6,7 @@ using Random = System.Random;
 public abstract class EnemyShooterBase : EnemyBase
 {
     [SerializeField] protected GameObject bulletPrefab = null;
+    //[SerializeField] protected GameObject trailfab = null;
     [SerializeField] protected float bulletForce = 20f;
     [SerializeField] protected GameObject strafeWaypoint;
     [SerializeField] protected float dodgeCooldown = 1f; //cool down for strafing
@@ -40,10 +41,14 @@ public abstract class EnemyShooterBase : EnemyBase
         {
             var fireDir = (player.transform.position - transform.position).normalized;
             GameObject bulletInstance = Instantiate(bulletPrefab, firingOrigin.position, firingOrigin.rotation);
+            //GameObject trail = Instantiate(trailfab, firingOrigin.position, firingOrigin.rotation);
             float angle = Mathf.Atan2(fireDir.y, fireDir.x) * Mathf.Rad2Deg - 90f;
             Rigidbody2D rb = bulletInstance.GetComponent<Rigidbody2D>();
+            //Rigidbody2D rbT = trail.GetComponent<Rigidbody2D>();
             rb.AddForce(fireDir * bulletForce, ForceMode2D.Impulse);
+            //rbT.AddForce(fireDir * bulletForce, ForceMode2D.Impulse);
             rb.rotation = angle;
+            //rbT.rotation = angle;
             fireTimer = fireInterval;
         }
         else if (fireTimer > Mathf.Epsilon)
